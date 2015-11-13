@@ -20,7 +20,7 @@ function planet.getPlayerOne()
     p1 = p.planets[1]
     return -p1.x, -p1.y
   else
-    return 0
+    return 0, 0
   end
 end
 
