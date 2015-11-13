@@ -1,3 +1,5 @@
+require "image"
+
 planet = {}
 local p = planet
 
@@ -35,6 +37,7 @@ end
 function planet.draw()
   love.graphics.setColor(50,50,230)
   for _,v in pairs(p.planets) do
-    love.graphics.circle("fill", v.x, v.y, v.r)
+    --love.graphics.circle("fill", v.x, v.y, v.r)
+    love.graphics.draw(image.planet_1, v.x, v.y)
   end
 end
