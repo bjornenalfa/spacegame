@@ -15,6 +15,15 @@ function planet.new(mass, distance, radius, angle, speed)
   })
 end
 
+function planet.getPlayerOne()
+  if table.getn(p.planets) then
+    p1 = p.planets[1]
+    return -p1.x, -p1.y
+  else
+    return 0
+  end
+end
+
 function planet.update(dt)
   for _,v in pairs(p.planets) do
     v.angle = v.angle + dt*v.speed
