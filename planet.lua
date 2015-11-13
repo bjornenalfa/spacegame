@@ -3,7 +3,7 @@ local p = planet
 
 p.planets = {}
 
-function planet.new(mass, distance, radius, angle, speed)
+function planet.new(mass, distance, radius, angle, speed, health)
   table.insert(p.planets, {
       m = mass, 
       d = distance, 
@@ -11,7 +11,8 @@ function planet.new(mass, distance, radius, angle, speed)
       x = 0, 
       y = 0,
       angle = 0,
-      speed = speed
+      speed = speed,
+      hp = health
   })
 end
 
