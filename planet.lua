@@ -5,7 +5,7 @@ local p = planet
 
 p.planets = {}
 
-function planet.new(mass, distance, radius, angle, speed, health)
+function planet.new(mass, distance, radius, angle, speed, health, colorRed, colorGreen, colorBlue)
   table.insert(p.planets, {
       m = mass, 
       d = distance, 
@@ -14,7 +14,10 @@ function planet.new(mass, distance, radius, angle, speed, health)
       y = 0,
       angle = 0,
       speed = speed,
-      hp = health
+      hp = health,
+      cRed = colorRed,
+      cGreen = colorGreen,
+      cBlue = colorBlue
   })
 end
 
@@ -36,9 +39,12 @@ function planet.update(dt)
 end
 
 function planet.draw()
-  love.graphics.setColor(50,50,230)
   for _,v in pairs(p.planets) do
-    --love.graphics.circle("fill", v.x, v.y, v.r)
-    love.graphics.draw(image.planet_1, v.x, v.y)
+    love.graphics.setColor(v.cRed, v.cGreen, v.cBlue)
+    img = image.planet_1
+    imgWidth = img:getWidth()
+    imgHeight = img:getHeight()
+    love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.r * 2 / imgWidth, v.r * 2 / imgHeight)
+    --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end

@@ -3,9 +3,9 @@ require "camera"
 
 function love.load()
   love.graphics.setBackgroundColor(0,0,0)
-  planet.new(1, 200, 50, 0, 0.5)
-  planet.new(1, 300, 20, 2, 0.1)
-  planet.new(1, 400, 40, 1, 0.02)
+  planet.new(1, 200, 50, 0, 0.5, 100, 200, 0, 200)
+  planet.new(1, 300, 20, 2, 0.1, 100, 0, 0, 250)
+  planet.new(1, 400, 40, 1, 0.02, 100, 100, 100, 100)
 end
 
 
