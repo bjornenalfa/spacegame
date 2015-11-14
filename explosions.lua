@@ -8,8 +8,8 @@ function explosions.new(x, y, time, radius)
     x = x,
     y = y,
     r = radius,
-    time = time
-    t = 0
+    time = time,
+    t = 0,
     frame = 1
   }
   table.insert(e.explosions, newEx)
