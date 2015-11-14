@@ -13,6 +13,7 @@ function planet.newSun(mass, x, y, radius, color, image)
     y = y,
     color = color,
     image = image,
+    scale = radius * 2 / image:getWidth(),
     moons = {},
     isSun = true
   }
@@ -33,6 +34,7 @@ function planet.new(mass, distance, radius, startAngle, speed, health, color, im
       hp = health,
       color = color,
       image = image,
+      scale = radius * 2 / image:getWidth(),
       moons = {},
       isSun = false
   }
@@ -76,7 +78,7 @@ function planet.draw()
     img = v.image
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
-    love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.r * 2 / imgWidth, v.r * 2 / imgHeight)
+    love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
     --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end

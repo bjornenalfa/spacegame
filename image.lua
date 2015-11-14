@@ -10,3 +10,4 @@ end
 addImage("sun")
 addImage("planet_1")
 addImage("missile_atomicbomb")
+addImage("FireStationBase")
