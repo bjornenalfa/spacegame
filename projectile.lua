@@ -55,13 +55,13 @@ function projectile.update(dt)
         table.insert(projectileRemovals, i)
       end
     end
-  end
-  for i = #projectileRemovals, 1, -1 do
-    print(projectileRemovals[i])
-    table.remove(p.projectiles, projectileRemovals[i])
-  end
-  for i = #collisions, 1, -1 do
-    table.remove(p.projectiles, collisions[i])
+    for i = #projectileRemovals, 1, -1 do
+      print(projectileRemovals[i])
+      table.remove(p.projectiles, projectileRemovals[i])
+    end
+    for i = #collisions, 1, -1 do
+      table.remove(p.projectiles, collisions[i])
+    end
   end
 end
 
