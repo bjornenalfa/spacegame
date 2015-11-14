@@ -38,7 +38,11 @@ function love.load()
   player1 = player.newPlayer("Bob", planet1, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", planet2, 90, "left", "right", "up")
   
+  background.load()
+  
   sound.battle3:play()
+  
+  love.graphics.setBackgroundColor(0, 0, 0)
 end
 
 -- 0 = normal mode, 1 = drunk mode
@@ -65,8 +69,9 @@ function love.keypressed(key)
 end
 
 function love.draw()
+  if drunkMode == 0 then background.drawNormal() end
   camera.draw()
-  background.draw()
+  if drunkMode == 1 then background.drawDrunk() end
   planet.draw()
   player.draw()
   projectile.draw()

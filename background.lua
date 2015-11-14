@@ -1,10 +1,36 @@
 background = {}
 local b = background
 
-function b.draw()
+b.starList = {}
+b.starCanvas = love.graphics.newCanvas(2500, 1500)
+
+function b.load()
+  width = b.starCanvas:getWidth()
+  height = b.starCanvas:getHeight()
+  b.starCanvas:renderTo(function ()
+    for i = 0, 1000 do
+      img = image.star1
+      if i % 2 == 0 then img = image.star2 end
+      x = math.random(0, width)
+      y = math.random(0, height)
+      scale = math.random(10, 20) / 100
+      color = {255, 255, 255, math.random(20, 170)}
+      love.graphics.setColor(color)
+      love.graphics.draw(img, x, y, 0, scale)
+    end
+  end)
+end
+
+function b.drawNormal()
+  width = b.starCanvas:getWidth()
+  height = b.starCanvas:getHeight()
+  love.graphics.draw(b.starCanvas, 0, 0)
+end
+
+function b.drawDrunk()
   if drunkMode == 1 then
     love.graphics.setColor(255, 255, 255)
-    b.draw1()
+    b.drawFancy()
   end
   starScale = 0.4
   imgList = {image.stars1, image.stars2, image.stars3, image.stars4}
@@ -33,7 +59,7 @@ function b.draw()
   end
 end
 
-function b.draw1()
+function b.drawFancy()
   img = image.background2
   width = img:getWidth()
   height = img:getHeight()
