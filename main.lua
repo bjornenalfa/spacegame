@@ -50,8 +50,6 @@ function love.load()
   
   background.load()
   
-  sound.battle3:play()
-  
   love.graphics.setBackgroundColor(0, 0, 0)
 end
 
@@ -79,11 +77,16 @@ function love.keypressed(key)
     love.event.quit()
   elseif key == " " then
     if drawMenu then
-      drawMenu = false
+      startGame()
     else
       events.startEvent(1, 5)
     end
   end
+end
+
+function startGame()
+  drawMenu = false
+  sound.battle3:play()
 end
 
 function love.draw()
