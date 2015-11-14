@@ -24,7 +24,10 @@ function projectile.update(dt)
     pr.y = pr.y + (pr.vy * dt)
     for _, pl in pairs(planet.planets) do
       if math.sqrt((pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)) < pl.r then
-        --pl.hp = pl.hp - pr.d
+        if not pl.isSun then
+          pl.hp = pl.hp - pr.d
+          print(pl.hp)
+        end
         table.insert(collisions, projectileIndex)
         break
       end
