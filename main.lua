@@ -33,8 +33,6 @@ end
 
 function love.draw()
   camera.draw()
-  --love.graphics.setColor(255, 255, 255)
-  --love.graphics.draw(image.sun, 0, 0)
   planet.draw()
   projectile.draw()
 end
