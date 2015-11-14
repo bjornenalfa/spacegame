@@ -55,7 +55,7 @@ function love.load()
 end
 
 -- 0 = normal mode, 1 = drunk mode
-drunkMode = 0
+drunkMode = false
 drawMenu = true
 time = 0
 function love.update(dt)
@@ -76,14 +76,18 @@ function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
   elseif key == " " then
+    if drawMenu then
+      drawMenu = false
+    else
     --events.startEvent(1, 5)
+    end
   end
 end
 
 function love.draw()
-  if not drunkMode then background.drawNormal() end
+  if not drunkMode then background.drawNormal() print("test 1") end
   camera.draw()
-  if drunkMode then background.drawDrunk() end
+  if drunkMode then background.drawDrunk() print("test 2") end
   if drawMenu then
     menu.draw()
   else
