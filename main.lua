@@ -6,6 +6,7 @@ require "sound"
 require "player"
 require "background"
 require "explosions"
+require "menu"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
@@ -47,6 +48,7 @@ end
 
 -- 0 = normal mode, 1 = drunk mode
 drunkMode = 0
+drawMenu = true
 time = 0
 function love.update(dt)
   time = time + dt
@@ -62,9 +64,13 @@ function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
   elseif key == " " then
-    drunkMode = 1
-    sound.battle1:stop()
-    sound.sandstorm:play()
+    if drawMenu then
+      drawMenu = false
+    else
+      drunkMode = 1
+      sound.battle1:stop()
+      sound.sandstorm:play()
+    end
   end
 end
 
@@ -72,8 +78,12 @@ function love.draw()
   if drunkMode == 0 then background.drawNormal() end
   camera.draw()
   if drunkMode == 1 then background.drawDrunk() end
-  planet.draw()
-  player.draw()
-  projectile.draw()
-  explosions.draw()
+  if drawMenu then
+    menu.draw()
+  else
+    planet.draw()
+    player.draw()
+    projectile.draw()
+    explosions.draw()
+  end
 end
