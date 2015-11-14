@@ -2,23 +2,35 @@ sound = {}
 local s = sound
 
 -- for long sound tracks
-function addSound(name, ext)
+function s.addSound(name, ext)
   s[name] = love.audio.newSource("media/audio/"..name..ext)
 end
 
 -- for short sound tracks
-function addStaticSound(name, ext)
+function s.addStaticSound(name, ext)
   s[name] = love.audio.newSource("media/audio/"..name..ext, "static")
 end
 
-addSound("battle1", ".ogg")
-s.battle1:setVolume(0.3)
-addSound("battle2", ".ogg")
-s.battle2:setVolume(0.4)
-addSound("battle3", ".ogg")
-s.battle3:setVolume(0.5)
-addSound("sandstorm", ".mp3")
+function s.play(so)
+  if type(so) == "string" then
+    so = s[so]
+  end
+  so:rewind()
+  so:play()
+end
 
-addStaticSound("missile_shoot", ".wav")
-addStaticSound("laser_shoot", ".wav")
-addStaticSound("planet_explode", ".wav")
+s.addSound("battle1", ".ogg")
+s.battle1:setVolume(0.3)
+s.addSound("battle2", ".ogg")
+s.battle2:setVolume(0.4)
+s.addSound("battle3", ".ogg")
+s.battle3:setVolume(0.5)
+s.addSound("sandstorm", ".mp3")
+
+s.addStaticSound("missile_shoot", ".wav")
+s.addStaticSound("laser_shoot", ".wav")
+s.addStaticSound("planet_explode", ".wav")
+
+for i = 1,3 do
+  s.addStaticSound("explosion"..i, ".wav")
+end

@@ -19,56 +19,72 @@ function asteroid.new(x, y, radius, angle, speed, image, color, rotationSpeed)
 end
 
 function asteroid.spawn()
-  asteroid.new(math.random(-500,500), -500, 20, -math.pi*math.random(0.01,0.99), 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2)
+  min_distance = 1600
+  max_distance = 1600
+  max_angle = math.rad(90)
+  angle_interval = math.rad(45)
+  
+  dist = math.random(min_distance, max_distance)
+  incoming = math.rad(math.random(0, 360))
+  movementDirection = math.rad(180) + incoming + math.random(-angle_interval, angle_interval)
+  asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 20, movementDirection, 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2)
 end
 
 function a.update(dt)
   collisions = {}
   projectileRemovals = {}
+  timeout = {}
   for projectileIndex, pr in pairs(a.asteroids) do
-    -- asteroid specific
-    pr.angle = pr.angle + pr.av * dt
-    --general
-    collided = false
-    ax = 0
-    ay = 0
-    for _, pl in pairs(planet.planets) do
-      sqdis = (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)
-      angle = math.atan2(pl.y - pr.y, pl.x - pr.x)
-      g = (0.02 * pl.m) / sqdis
-      ax = ax + math.cos(angle) * g
-      ay = ay + math.sin(angle) * g
-    end
-    pr.vx = pr.vx + ax * dt 
-    pr.vy = pr.vy + ay * dt
-    pr.x = pr.x + (pr.vx * dt)
-    pr.y = pr.y + (pr.vy * dt)
-    
-    for _, pl in pairs(planet.planets) do
-      if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
-        table.insert(collisions, projectileIndex)
-        collided = true
-        break
+    if (pr.x * pr.x) + (pr.y * pr.y) > 1800*1800 then
+      table.insert(timeout, projectileIndex)
+    else
+      -- asteroid specific
+      pr.angle = pr.angle + pr.av * dt
+      --general
+      collided = false
+      ax = 0
+      ay = 0
+      for _, pl in pairs(planet.planets) do
+        sqdis = (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)
+        angle = math.atan2(pl.y - pr.y, pl.x - pr.x)
+        g = (0.02 * pl.m) / sqdis
+        ax = ax + math.cos(angle) * g
+        ay = ay + math.sin(angle) * g
       end
-    end
-    
-    for i, other in pairs(projectile.projectiles) do
-      if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 50+pr.r*pr.r then
-        if not collided then
+      pr.vx = pr.vx + ax * dt 
+      pr.vy = pr.vy + ay * dt
+      pr.x = pr.x + (pr.vx * dt)
+      pr.y = pr.y + (pr.vy * dt)
+      
+      for _, pl in pairs(planet.planets) do
+        if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
           table.insert(collisions, projectileIndex)
+          collided = true
+          break
         end
-        table.insert(projectileRemovals, i)
-        break
+      end
+      
+      for i, other in pairs(projectile.projectiles) do
+        if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 50+pr.r*pr.r then
+          if not collided then
+            table.insert(collisions, projectileIndex)
+          end
+          table.insert(projectileRemovals, i)
+          break
+        end
       end
     end
   end
   for i = #projectileRemovals, 1, -1 do
-    explosions.new(projectile.projectiles[projectileRemovals[i]].x, projectile.projectiles[projectileRemovals[i]].y, 0.2, projectile.projectiles[projectileRemovals[i]].w)
+    explosions.new(projectile.projectiles[projectileRemovals[i]].x, projectile.projectiles[projectileRemovals[i]].y, 0.2, projectile.projectiles[projectileRemovals[i]].w, true)
     table.remove(projectile.projectiles, projectileRemovals[i])
   end
   for i = #collisions, 1, -1 do
-    explosions.new(a.asteroids[collisions[i]].x, a.asteroids[collisions[i]].y, 0.2, a.asteroids[collisions[i]].r)
+    explosions.new(a.asteroids[collisions[i]].x, a.asteroids[collisions[i]].y, 0.2, a.asteroids[collisions[i]].r, true)
     table.remove(a.asteroids, collisions[i])
+  end
+  for i = #timeout, 1, -1 do
+    table.remove(a.asteroids, timeout[i])
   end
 end
 
