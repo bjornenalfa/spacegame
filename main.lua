@@ -55,7 +55,6 @@ drunkMode = 0
 drawMenu = true
 time = 0
 function love.update(dt)
-  dt = dt * 2
   if math.random(0,100) <= dt*100 then
     asteroid.spawn()
   end
