@@ -16,15 +16,15 @@ function explosions.new(x, y, time, radius)
   return newEx
 end
 
-frames = 3
+frames = 6
 function explosions.update(dt)
   toRemove = {}
   for _,v in pairs(e.explosions) do
     v.t = v.t + dt
-    if v.t > v.time then
+    if v.t >= v.time then
       table.insert(toRemove,_)
     else
-      frame = math.floor(v.t/v.time)
+      v.frame = math.floor((v.t/v.time)*frames) +1
     end
   end
   for i = #toRemove, 1, -1 do
@@ -38,6 +38,6 @@ function explosions.draw()
     img = image["planetexplosion"..v.frame]
     w = img:getWidth()
     h = img:getHeight()
-    love.graphics.draw(img, x, y, 0, v.r/w, v.r/h, w/2, h/2)
+    love.graphics.draw(img, v.x, v.y, 0, v.r*2/w, v.r*2/h, w/2, h/2)
   end
 end

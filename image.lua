@@ -19,7 +19,7 @@ for i = 0,5 do
   addImage("cracks"..i)
 end
 
-for i = 1,3 do
+for i = 1,6 do
   addImage("planetexplosion"..i)
 end
 
