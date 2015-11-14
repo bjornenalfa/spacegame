@@ -25,8 +25,9 @@ function projectile.update(dt)
   collisions = {}
   projectileRemovals = {}
   for projectileIndex, pr in pairs(p.projectiles) do
-    pr.ox = pr.x
-    pr.oy = pr.y
+    --pr.ox = pr.x
+    --pr.oy = pr.y
+    collided = false
     ax = 0
     ay = 0
     for _, pl in pairs(planet.planets) do
@@ -47,22 +48,27 @@ function projectile.update(dt)
           pl.hp = pl.hp - pr.d
         end
         table.insert(collisions, projectileIndex)
+        collided = true
         break
       end
     end
     
     for i, other in pairs(p.projectiles) do
       if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
-        table.insert(projectileRemovals, projectileIndex)
-        table.insert(projectileRemovals, i)
-      explosions.new(pr.x, pr.y, 0.2, 200)
+        if not collided then
+          table.insert(projectileRemovals, projectileIndex)
+        end
+        --table.insert(collisions, i)
+        break
       end
     end
   end
   for i = #projectileRemovals, 1, -1 do
+    explosions.new(p.projectiles[projectileRemovals[i]].x, p.projectiles[projectileRemovals[i]].y, 0.2, p.projectiles[projectileRemovals[i]].w)
     table.remove(p.projectiles, projectileRemovals[i])
   end
   for i = #collisions, 1, -1 do
+    explosions.new(p.projectiles[collisions[i]].x, p.projectiles[collisions[i]].y, 0.2, p.projectiles[collisions[i]].w)
     table.remove(p.projectiles, collisions[i])
   end
 end
