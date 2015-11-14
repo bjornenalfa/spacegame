@@ -5,6 +5,7 @@ require "image"
 require "sound"
 require "player"
 require "background"
+require "explosions"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
@@ -49,6 +50,7 @@ function love.update(dt)
   planet.update(dt)
   player.update(dt)
   projectile.update(dt)
+  explosions.update(dt)
 end
 
 function love.keypressed(key)
@@ -68,4 +70,5 @@ function love.draw()
   planet.draw()
   player.draw()
   projectile.draw()
+  explosions.draw()
 end
