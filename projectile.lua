@@ -3,7 +3,7 @@ local p = projectile
 
 p.projectiles = {}
 
-function projectile.new(image, mass, locationX, locationY, length, width, speed, angle, damage)
+function projectile.new(image, mass, locationX, locationY, length, width, speed, angle, damage, owner)
   table.insert(p.projectiles, {
       img = image,
       m = mass,
@@ -15,7 +15,9 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
       w = width,
       vx = speed * math.cos(angle),
       vy = speed * math.sin(angle),
-      d = damage
+      d = damage,
+      duration = 0,
+      owner = owner
   })
   sound.missile_shoot:rewind()
   sound.missile_shoot:play()
@@ -24,42 +26,59 @@ end
 function projectile.update(dt)
   collisions = {}
   projectileRemovals = {}
+  timeout = {}
   for projectileIndex, pr in pairs(p.projectiles) do
-    --pr.ox = pr.x
-    --pr.oy = pr.y
-    collided = false
-    ax = 0
-    ay = 0
-    for _, pl in pairs(planet.planets) do
-      sqdis = (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)
-      angle = math.atan2(pl.y - pr.y, pl.x - pr.x)
-      g = (pl.m) / sqdis
-      ax = ax + math.cos(angle) * g
-      ay = ay + math.sin(angle) * g
-    end
-    pr.vx = pr.vx + ax * dt 
-    pr.vy = pr.vy + ay * dt
-    pr.x = pr.x + (pr.vx * dt)
-    pr.y = pr.y + (pr.vy * dt)
-    
-    for _, pl in pairs(planet.planets) do
-      if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
-        if not pl.isSun then
-          pl.hp = pl.hp - pr.d
-        end
-        table.insert(collisions, projectileIndex)
-        collided = true
-        break
+    pr.duration = pr.duration + dt
+    if pr.duration > 3 then
+      table.insert(timeout, projectileIndex)
+    else
+      --pr.ox = pr.x
+      --pr.oy = pr.y
+      collided = false
+      ax = 0
+      ay = 0
+      for _, pl in pairs(planet.planets) do
+        sqdis = (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)
+        angle = math.atan2(pl.y - pr.y, pl.x - pr.x)
+        g = (pl.m) / sqdis
+        ax = ax + math.cos(angle) * g
+        ay = ay + math.sin(angle) * g
       end
-    end
-    
-    for i, other in pairs(p.projectiles) do
-      if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
-        if not collided then
-          table.insert(projectileRemovals, projectileIndex)
+      pr.vx = pr.vx + ax * dt 
+      pr.vy = pr.vy + ay * dt
+      pr.x = pr.x + (pr.vx * dt)
+      pr.y = pr.y + (pr.vy * dt)
+      
+      for _, pl in pairs(planet.planets) do
+        if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
+          if not pl.isSun then
+            pl.hp = pl.hp - pr.d
+            belongsToPlayer = false
+            for _, plr in pairs(player.players) do
+              if plr.planet == pl then
+                belongsToPlayer = true
+                break
+              end
+            end
+            if belongsToPlayer then
+              pr.owner.score = pr.owner.score + 100 * (3-pr.duration)
+              print(pr.owner.score)
+            end
+          end
+          table.insert(collisions, projectileIndex)
+          collided = true
+          break
         end
-        --table.insert(collisions, i)
-        break
+      end
+      
+      for i, other in pairs(p.projectiles) do
+        if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
+          if not collided then
+            table.insert(projectileRemovals, projectileIndex)
+          end
+          --table.insert(collisions, i)
+          break
+        end
       end
     end
   end
@@ -70,6 +89,10 @@ function projectile.update(dt)
   for i = #collisions, 1, -1 do
     explosions.new(p.projectiles[collisions[i]].x, p.projectiles[collisions[i]].y, 0.2, p.projectiles[collisions[i]].w)
     table.remove(p.projectiles, collisions[i])
+  end
+  for i = #timeout, 1, -1 do
+    explosions.new(p.projectiles[timeout[i]].x, p.projectiles[timeout[i]].y, 0.2, p.projectiles[timeout[i]].w)
+    table.remove(p.projectiles, timeout[i])
   end
 end
 

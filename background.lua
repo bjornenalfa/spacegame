@@ -24,6 +24,7 @@ end
 function b.drawNormal()
   width = b.starCanvas:getWidth()
   height = b.starCanvas:getHeight()
+  love.graphics.setColor(255, 255, 255)
   love.graphics.draw(b.starCanvas, 0, 0)
 end
 
