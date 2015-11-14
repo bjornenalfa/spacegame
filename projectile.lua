@@ -39,15 +39,26 @@ function projectile.update(dt)
     pr.y = pr.y + (pr.vy * dt)
     
     for _, pl in pairs(planet.planets) do
-      if math.sqrt((pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)) < pl.r then
+      if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
         if not pl.isSun then
           pl.hp = pl.hp - pr.d
-          print(pl.hp)
         end
         table.insert(collisions, projectileIndex)
         break
       end
     end
+    
+    projectileRemovals = {}
+    for i, other in pairs(p.projectiles) do
+      if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
+        table.insert(projectileRemovals, projectileIndex)
+        table.insert(projectileRemovals, i)
+      end
+    end
+  end
+  for i = #projectileRemovals, 1, -1 do
+    print(projectileRemovals[i])
+    table.remove(p.projectiles, projectileRemovals[i])
   end
   for i = #collisions, 1, -1 do
     table.remove(p.projectiles, collisions[i])

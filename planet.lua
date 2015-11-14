@@ -70,6 +70,7 @@ function planet.update(dt)
   end
   for i = #destroyed, 1, -1 do
     planet.fullRemove(p.planets[destroyed[i]])
+    sound.planet_explode:play()
   end
 end
 
