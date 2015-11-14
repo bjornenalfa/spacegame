@@ -15,5 +15,5 @@ end
 
 function camera.draw()
   love.graphics.translate(c.x, c.y)
-  love.graphics.scale(0.3)
+  love.graphics.scale(0.7)
 end
