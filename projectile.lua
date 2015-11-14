@@ -9,6 +9,8 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
       m = mass,
       x = locationX,
       y = locationY,
+      ox = 0,
+      oy = 0,
       l = length,
       w = width,
       vx = speed * math.cos(angle),
@@ -20,6 +22,8 @@ end
 function projectile.update(dt)
   collisions = {}
   for projectileIndex, pr in pairs(p.projectiles) do
+    pr.ox = pr.x
+    pr.oy = pr.y
     ax = 0
     ay = 0
     for _, pl in pairs(planet.planets) do
@@ -51,7 +55,9 @@ function projectile.update(dt)
 end
 
 function projectile.draw()
+  love.graphics.setColor(255,255,255)
   for _, pr in pairs(p.projectiles) do
-    love.graphics.draw(pr.img, pr.x, pr.y, pr.r, pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
+    love.graphics.line(pr.ox, pr.oy, pr.x, pr.y)
+    --love.graphics.draw(pr.img, pr.x, pr.y, pr.r, pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
   end
 end
