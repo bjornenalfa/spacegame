@@ -13,3 +13,7 @@ end
 
 addSound("battle1", ".ogg")
 addSound("sandstorm", ".mp3")
+
+addStaticSound("missile_shoot", ".wav")
+addStaticSound("laser_shoot", ".wav")
+addStaticSound("planet_explode", ".wav")
