@@ -35,8 +35,9 @@ end
 time = 0
 function love.update(dt)
   time = time + dt
-  camera.update()
+  camera.update(dt)
   planet.update(dt)
+  player.update(dt)
   projectile.update(dt)
 end
 
