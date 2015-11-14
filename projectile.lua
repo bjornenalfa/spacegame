@@ -28,7 +28,7 @@ function projectile.update(dt)
   timeout = {}
   for projectileIndex, pr in pairs(p.projectiles) do
     pr.duration = pr.duration + dt
-    if pr.duration > 3 then
+    if pr.duration > 6 then
       table.insert(timeout, projectileIndex)
     else
       --pr.ox = pr.x

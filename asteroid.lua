@@ -19,14 +19,14 @@ function asteroid.new(x, y, radius, angle, speed, image, color, rotationSpeed)
 end
 
 function asteroid.spawn()
-  min_distance = 1700
-  max_distance = 1700
+  min_distance = 1600
+  max_distance = 1600
   max_angle = math.rad(90)
   angle_interval = math.rad(45)
   
   dist = math.random(min_distance, max_distance)
   incoming = math.rad(math.random(0, 360))
-  movementDirection = math.rad(180) - incoming + math.random(-45, 45)
+  movementDirection = math.rad(180) + incoming + math.random(-angle_interval, angle_interval)
   asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 20, movementDirection, 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2)
 end
 
