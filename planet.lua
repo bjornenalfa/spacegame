@@ -45,6 +45,7 @@ end
 
 function planet:addMoon(moon)
   table.insert(self.moons, moon)
+  moon.parent = self
 end
 
 function planet.getPlayerOne()
@@ -91,16 +92,21 @@ function planet.draw()
 end
 
 function planet.fullRemove(target)
-  if target.moons == {} then
-    for k, v in pairs(p.planets) do
-      if v == target then
-        table.remove(p.planets, k)
-        assert(not elem(v, p.planets), "Planet not removed.")
-        return
-      end
+  for k, v in pairs(p.planets) do
+    if v == target then
+      table.remove(p.planets, k)
+      assert(not elem(v, p.planets), "Planet not removed.")
+      break
     end
-    assert(false, "No such item in p.planets")
-  else
+  end
+  for k, v in pairs(target.parent.moons) do
+    if v == target then
+      table.remove(target.parent.moons, k)
+      assert(not elem(v, target.parent.moons), "Planet not removed.")
+      break
+    end
+  end
+  if #target.moons then
     for _, v in pairs(target.moons) do
       assert(elem(v, p.planets), "Moon not in planet list")
       planet.fullRemove(v)
