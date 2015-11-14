@@ -19,7 +19,7 @@ function events.startEvent(i, time)
   e.active[i] = true
   table.insert(e.stop, {time=time, event=i})
   if i == 1 then
-    e.showText("Drunk mode")
+    e.showText("Space sunglasses")
     drunkMode = true
     sound.battle1:stop()
     sound.play(sound.sandstorm)
