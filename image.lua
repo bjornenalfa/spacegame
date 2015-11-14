@@ -11,6 +11,8 @@ addImage("planet_1")
 addImage("missile_atomicbomb")
 addImage("missile_atomicbombSmall")
 addImage("FireStationBase")
+addImage("FireStationBase_cannon")
+addImage("cannonSmall")
 
 for i = 0,5 do
   addImage("cracks"..i)
