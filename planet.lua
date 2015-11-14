@@ -20,6 +20,7 @@ function planet.newSun(mass, x, y, radius, color, image)
     isSun = true
   }
   table.insert(p.planets, newSun)
+  table.insert(p.suns, newSun)
   setmetatable(newSun, planet)
   return newSun
 end
