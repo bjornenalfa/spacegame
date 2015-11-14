@@ -7,13 +7,16 @@ require "player"
 require "background"
 require "explosions"
 require "menu"
+require "asteroid"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
   
+  asteroid.spawn()
+  
   -- suns and planets
   -- mass, x, y, radius, color, image
-  sun = planet.newSun(1e8, 0, 0, 100, {255, 255, 255}, image.sun)
+  sun = planet.newSun(1e8, 0, 0, 1, {255, 255, 255}, image.sun)
   -- mass, distance, radius, startAngle, speed, health, color, image
   planetDuoBase = planet.new( 1,   150,  0,   270,  0.5,   100000,  {0, 0, 0},  image.planet_1)
   planetDuo1 = planet.new( 4e6,   30,  20,   180,  1,   100,  {255, 100, 100},  image.planet_1)
@@ -51,12 +54,17 @@ drunkMode = 0
 drawMenu = true
 time = 0
 function love.update(dt)
+  dt = dt * 2
+  if math.random(0,100) <= dt*100 then
+    asteroid.spawn()
+  end
   time = time + dt
   camera.update(dt)
   planet.update(dt)
   player.update(dt)
   projectile.update(dt)
   explosions.update(dt)
+  asteroid.update(dt)
 end
 
 function love.keypressed(key)
@@ -85,5 +93,6 @@ function love.draw()
     player.draw()
     projectile.draw()
     explosions.draw()
+    asteroid.draw()
   end
 end

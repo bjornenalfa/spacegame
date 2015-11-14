@@ -23,6 +23,10 @@ for i = 1,6 do
   addImage("planetexplosion"..i)
 end
 
+for i = 1,5 do
+  addImage("planetdebris"..i)
+end
+
 addImage("background2")
 addImage("stars1")
 addImage("stars2")
