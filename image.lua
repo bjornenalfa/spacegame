@@ -11,6 +11,7 @@ addImage("sun")
 addImage("sun_sunglasses")
 addImage("planet_1")
 addImage("missile_atomicbomb")
+addImage("missile_atomicbombSmall")
 addImage("FireStationBase")
 
 for i = 0,5 do
