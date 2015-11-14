@@ -70,16 +70,14 @@ function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
   elseif key == " " then
-    drunkMode = 1
-    sound.battle1:stop()
-    sound.sandstorm:play()
+    events.startEvent(1, 5)
   end
 end
 
 function love.draw()
-  if drunkMode == 0 then background.drawNormal() end
+  if not drunkMode then background.drawNormal() end
   camera.draw()
-  if drunkMode == 1 then background.drawDrunk() end
+  if drunkMode then background.drawDrunk() end
   planet.draw()
   player.draw()
   projectile.draw()
