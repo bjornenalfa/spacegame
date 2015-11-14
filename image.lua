@@ -9,4 +9,4 @@ end
 
 addImage("sun")
 addImage("planet_1")
-addImage("media/missile_atomicbomb.png")
+addImage("media/missile_atomicbomb")
