@@ -84,6 +84,7 @@ function planet.draw()
   for _,v in pairs(p.planets) do
     love.graphics.setColor(v.color)
     img = v.image
+    if v.isSun and drunkMode == 1 then img = image.sun_sunglasses end
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
     love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)

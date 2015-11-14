@@ -8,6 +8,7 @@ function addImage(name)
 end
 
 addImage("sun")
+addImage("sun_sunglasses")
 addImage("planet_1")
 addImage("missile_atomicbomb")
 addImage("FireStationBase")
