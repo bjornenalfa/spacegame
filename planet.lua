@@ -21,14 +21,14 @@ function planet.newSun(mass, x, y, radius, color, image)
   return newSun
 end
 
-function planet.new(mass, distance, radius, angle, speed, health, color, image)
+function planet.new(mass, distance, radius, startAngle, speed, health, color, image)
   newPlanet = {
       m = mass, 
       d = distance, 
       r = radius, 
-      x = 0, 
+      x = 0,
       y = 0,
-      angle = 0,
+      angle = math.rad(startAngle),
       speed = speed,
       hp = health,
       color = color,

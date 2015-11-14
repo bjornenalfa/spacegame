@@ -10,11 +10,11 @@ function love.load()
   -- suns and planets
   -- mass, x, y, radius, color, image
   sun = planet.newSun(100, 0, 0, 150, {255, 255, 255}, image.sun)
-  -- mass, distance, radius, angle, speed, health, color, image
-  planet1 = planet.new(20, 450, 50, 0, 0.5, 100, {200, 0, 200}, image.planet_1)
-  planet2 = planet.new(8, 270, 20, 2, 1, 100, {0, 0, 250}, image.planet_1)
-  planet3 = planet.new(15, 800, 40, 1, 0.15, 100, {100, 100, 100}, image.planet_1)
-  moon1 = planet.new(1, 100, 10, 0, 1.5, 100, {200, 0, 200}, image.planet_1)
+  -- mass, distance, radius, startAngle, speed, health, color, image
+  planet1 = planet.new( 20,   450,  50,   0,    0.5,    100,  {200, 0, 200},    image.planet_1)
+  planet2 = planet.new( 8,    270,  20,   90,   1,      100,  {0, 0, 250},      image.planet_1)
+  planet3 = planet.new( 15,   800,  40,   180,  0.15,   100,  {100, 100, 100},  image.planet_1)
+  moon1 = planet.new(   1,    100,  10,   0,    1.5,    100,  {200, 0, 200},    image.planet_1)
   sun:addMoon(planet1)
   sun:addMoon(planet2)
   sun:addMoon(planet3)
