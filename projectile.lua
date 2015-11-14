@@ -19,8 +19,7 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
       duration = 0,
       owner = owner
   })
-  sound.missile_shoot:rewind()
-  sound.missile_shoot:play()
+  sound.play(sound.missile_shoot)
 end
 
 function projectile.update(dt)
@@ -83,15 +82,15 @@ function projectile.update(dt)
     end
   end
   for i = #projectileRemovals, 1, -1 do
-    explosions.new(p.projectiles[projectileRemovals[i]].x, p.projectiles[projectileRemovals[i]].y, 0.2, p.projectiles[projectileRemovals[i]].w)
+    explosions.new(p.projectiles[projectileRemovals[i]].x, p.projectiles[projectileRemovals[i]].y, 0.2, p.projectiles[projectileRemovals[i]].w, true)
     table.remove(p.projectiles, projectileRemovals[i])
   end
   for i = #collisions, 1, -1 do
-    explosions.new(p.projectiles[collisions[i]].x, p.projectiles[collisions[i]].y, 0.2, p.projectiles[collisions[i]].w)
+    explosions.new(p.projectiles[collisions[i]].x, p.projectiles[collisions[i]].y, 0.2, p.projectiles[collisions[i]].w, true)
     table.remove(p.projectiles, collisions[i])
   end
   for i = #timeout, 1, -1 do
-    explosions.new(p.projectiles[timeout[i]].x, p.projectiles[timeout[i]].y, 0.2, p.projectiles[timeout[i]].w)
+    explosions.new(p.projectiles[timeout[i]].x, p.projectiles[timeout[i]].y, 0.2, p.projectiles[timeout[i]].w, true)
     table.remove(p.projectiles, timeout[i])
   end
 end

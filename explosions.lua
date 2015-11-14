@@ -3,7 +3,10 @@ local e = explosions
 
 e.explosions = {}
 
-function explosions.new(x, y, time, radius)
+function explosions.new(x, y, time, radius, playSound)
+  if playSound then
+    sound.play(sound["explosion"..math.random(1,3)])
+  end
   newEx = {
     x = x,
     y = y,
