@@ -42,7 +42,6 @@ function projectile.update(dt)
       if math.sqrt((pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)) < pl.r then
         if not pl.isSun then
           pl.hp = pl.hp - pr.d
-          print(pl.hp)
         end
         table.insert(collisions, projectileIndex)
         break
