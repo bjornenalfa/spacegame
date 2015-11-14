@@ -2,11 +2,28 @@ require "image"
 
 planet = {}
 local p = planet
+p.__index = p --Inheritance!
 
 p.planets = {}
+p.suns = {}
 
-function planet.new(mass, distance, radius, angle, speed, health)
-  table.insert(p.planets, {
+function planet.newSun(mass, x, y, radius, color, image)
+  newSun = {
+    m = mass,
+    r = radius,
+    x = x,
+    y = y,
+    color = color,
+    image = image,
+    moons = {}
+  }
+  table.insert(p.planets, newSun)
+  setmetatable(newSun, planet)
+  return newSun
+end
+
+function planet.new(mass, distance, radius, angle, speed, health, color, image)
+  newPlanet = {
       m = mass, 
       d = distance, 
       r = radius, 
@@ -14,8 +31,18 @@ function planet.new(mass, distance, radius, angle, speed, health)
       y = 0,
       angle = 0,
       speed = speed,
-      hp = health
-  })
+      hp = health,
+      color = color,
+      image = image,
+      moons = {}
+  }
+  table.insert(p.planets, newPlanet)
+  setmetatable(newPlanet, planet)
+  return newPlanet
+end
+
+function planet:addMoon(moon)
+  table.insert(self.moons, moon)
 end
 
 function planet.getPlayerOne()
@@ -29,16 +56,27 @@ end
 
 function planet.update(dt)
   for _,v in pairs(p.planets) do
+    planet.updateMoons(v.x, v.y, v.moons, dt)
+  end
+end
+
+function planet.updateMoons(cx, cy, moons, dt)
+  for _,v in pairs(moons) do
     v.angle = v.angle + dt*v.speed
-    v.x = 400+math.cos(v.angle)*v.d
-    v.y = 300+math.sin(v.angle)*v.d
+    v.x = cx+math.cos(v.angle)*v.d
+    v.y = cy+math.sin(v.angle)*v.d
+    planet.updateMoons(v.x, v.y, v.moons, dt)
   end
 end
 
 function planet.draw()
-  love.graphics.setColor(50,50,230)
+  
   for _,v in pairs(p.planets) do
-    --love.graphics.circle("fill", v.x, v.y, v.r)
-    love.graphics.draw(image.planet_1, v.x, v.y)
+    love.graphics.setColor(v.color)
+    img = v.image
+    imgWidth = img:getWidth()
+    imgHeight = img:getHeight()
+    love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.r * 2 / imgWidth, v.r * 2 / imgHeight)
+    --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end

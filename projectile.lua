@@ -1,6 +1,3 @@
-require "image"
-require "planet"
-
 projectile = {}
 local p = projectile
 
