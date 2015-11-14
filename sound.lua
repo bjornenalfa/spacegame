@@ -11,9 +11,12 @@ function s.addStaticSound(name, ext)
   s[name] = love.audio.newSource("media/audio/"..name..ext, "static")
 end
 
-function s.play(name)
-  s[name]:rewind()
-  s[name]:play()
+function s.play(so)
+  if type(so) == "string" then
+    so = s[so]
+  end
+  so:rewind()
+  so:play()
 end
 
 s.addSound("battle1", ".ogg")
