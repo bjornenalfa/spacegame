@@ -1,5 +1,3 @@
-require "planet"
-
 camera = {}
 local c = camera
 

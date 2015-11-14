@@ -1,5 +1,3 @@
-require "image"
-
 planet = {}
 local p = planet
 p.__index = p --Inheritance!
