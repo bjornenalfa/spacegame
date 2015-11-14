@@ -9,12 +9,12 @@ function love.load()
   
   -- suns and planets
   -- mass, x, y, radius, color, image
-  sun = planet.newSun(100, 0, 0, 150, {255, 255, 255}, image.sun)
-  -- mass, distance, radius, angle, speed, health, color, image
-  planet1 = planet.new(20, 450, 50, 0, 0.5, 100, {200, 0, 200}, image.planet_1)
-  planet2 = planet.new(8, 270, 20, 2, 1, 100, {0, 0, 250}, image.planet_1)
-  planet3 = planet.new(15, 800, 40, 1, 0.15, 100, {100, 100, 100}, image.planet_1)
-  moon1 = planet.new(1, 100, 10, 0, 1.5, 100, {200, 0, 200}, image.planet_1)
+  sun = planet.newSun(1e7, 0, 0, 150, {255, 255, 255}, image.sun)
+  -- mass, distance, radius, startAngle, speed, health, color, image
+  planet1 = planet.new( 20e5,   450,  50,   0,    0.5,    100,  {200, 0, 200},    image.planet_1)
+  planet2 = planet.new( 8e5,    270,  20,   90,   1,      100,  {0, 0, 250},      image.planet_1)
+  planet3 = planet.new( 15e5,   800,  40,   180,  0.15,   100,  {100, 100, 100},  image.planet_1)
+  moon1 = planet.new(   1e5,    100,  10,   0,    1.5,    100,  {200, 0, 200},    image.planet_1)
   sun:addMoon(planet1)
   sun:addMoon(planet2)
   sun:addMoon(planet3)
@@ -22,8 +22,8 @@ function love.load()
   
   -- players
   -- name, planet
-  player1 = player.newPlayer("Bob", planet1)
-  player2 = player.newPlayer("SuperChungusIV", planet2)
+  player1 = player.newPlayer("Bob", planet1, 90, "a", "d", "w")
+  player2 = player.newPlayer("SuperChungusIV", planet3, -90, "left", "right", "up")
 end
 
 
@@ -36,6 +36,7 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
+  player.keypressed(key)
   if key == "escape" then
     love.event.quit()
   end
@@ -44,5 +45,6 @@ end
 function love.draw()
   camera.draw()
   planet.draw()
+  player.draw()
   projectile.draw()
 end
