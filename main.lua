@@ -8,6 +8,7 @@ require "background"
 require "explosions"
 require "menu"
 require "asteroid"
+require "font"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
