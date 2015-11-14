@@ -19,6 +19,10 @@ for i = 0,5 do
   addImage("cracks"..i)
 end
 
+for i = 1,3 do
+  addImage("planetexplosion"..i)
+end
+
 addImage("background2")
 addImage("stars1")
 addImage("stars2")

@@ -12,6 +12,11 @@ function addStaticSound(name, ext)
 end
 
 addSound("battle1", ".ogg")
+s.battle1:setVolume(0.3)
+addSound("battle2", ".ogg")
+s.battle2:setVolume(0.4)
+addSound("battle3", ".ogg")
+s.battle3:setVolume(0.5)
 addSound("sandstorm", ".mp3")
 
 addStaticSound("missile_shoot", ".wav")

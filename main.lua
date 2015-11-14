@@ -38,7 +38,7 @@ function love.load()
   player1 = player.newPlayer("Bob", planet1, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", planet2, 90, "left", "right", "up")
   
-  sound.battle1:play()
+  sound.battle3:play()
 end
 
 -- 0 = normal mode, 1 = drunk mode
