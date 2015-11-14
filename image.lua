@@ -11,4 +11,8 @@ addImage("sun")
 addImage("planet_1")
 addImage("missile_atomicbomb")
 addImage("FireStationBase")
-addImage("background2")
+--addImage("background2")
+
+for i = 0,5 do
+  addImage("cracks"..i)
+end
