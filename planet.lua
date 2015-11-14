@@ -87,6 +87,7 @@ function planet.draw()
   for _,v in pairs(p.planets) do
     love.graphics.setColor(v.color)
     img = v.image
+    if v.isSun and drunkMode == 1 then img = image.sun_sunglasses end
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
     crack = math.floor(((v.maxhp - v.hp) / v.maxhp) * 5 + 0.5)

@@ -31,7 +31,8 @@ function love.load()
   player2 = player.newPlayer("SuperChungusIV", planet2, 90, "left", "right", "up")
 end
 
-
+-- 0 = normal mode, 1 = drunk mode
+drunkMode = 0
 time = 0
 function love.update(dt)
   time = time + dt
@@ -45,6 +46,8 @@ function love.keypressed(key)
   player.keypressed(key)
   if key == "escape" then
     love.event.quit()
+  elseif key == " " then
+    drunkMode = 1
   end
 end
 
