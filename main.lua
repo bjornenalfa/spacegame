@@ -23,6 +23,12 @@ function love.update(dt)
   planet.update(dt)
 end
 
+function love.keypressed(key)
+  if key == "escape" then
+    love.event.quit()
+  end
+end
+
 function love.draw()
   camera.draw()
   --love.graphics.setColor(255, 255, 255)
