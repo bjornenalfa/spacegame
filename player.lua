@@ -7,7 +7,7 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
   newPlayer = {
     name = name,
     planet = planet,
-    fireAngle = math.rad(towerAngle),
+    fireAngle = 0,
     towerAngle = math.rad(towerAngle),
     keyLeft = keyLeft,
     keyRight = keyRight,
@@ -24,8 +24,8 @@ function p.update(dt)
     if love.keyboard.isDown(v.keyFire) and v.cooldown <= 0 then
       v.cooldown = 1
       pt = v.planet
-      x = pt.x + math.cos(v.towerAngle) * pt.r + 10
-      y = pt.y + math.sin(v.towerAngle) * pt.r + 10
+      x = pt.x + math.cos(v.towerAngle) * (pt.r + 10)
+      y = pt.y + math.sin(v.towerAngle) * (pt.r + 10)
       projectile.new(image.missile_atomicbomb, 1, x, y, 20, 20, 1000, v.towerAngle + v.fireAngle, 10)
     end
     if love.keyboard.isDown(v.keyLeft) then
@@ -59,6 +59,7 @@ function p.keypressed(key)
 end
 
 function p.draw()
+  love.graphics.setColor(255,255,255)
   for _,v in pairs(p.players) do
     img = image.FireStationBase
     width = img:getWidth()
