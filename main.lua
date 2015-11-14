@@ -2,6 +2,7 @@ require "planet"
 require "projectile"
 require "camera"
 require "image"
+require "sound"
 require "player"
 require "background"
 
@@ -29,6 +30,8 @@ function love.load()
   -- name, planet
   player1 = player.newPlayer("Bob", planet1, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", planet2, 90, "left", "right", "up")
+  
+  sound.battle1:play()
 end
 
 -- 0 = normal mode, 1 = drunk mode
