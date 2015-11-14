@@ -5,7 +5,7 @@ require "image"
 require "player"
 
 function love.load()
-  projectile.new(image.missile_atomicbomb, 0.01, 10, 10, 20, 20, 200, 0, 90)
+  projectile.new(image.missile_atomicbomb, 0.01, -360, 250, 20, 20, 200, 0, 90)
   
   -- suns and planets
   -- mass, x, y, radius, color, image
