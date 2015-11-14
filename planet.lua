@@ -11,6 +11,8 @@ function planet.newSun(mass, x, y, radius, color, image)
     r = radius,
     x = x,
     y = y,
+    hp = 100000,
+    maxhp = 100000,
     color = color,
     image = image,
     scale = radius * 2 / image:getWidth(),
@@ -32,6 +34,7 @@ function planet.new(mass, distance, radius, startAngle, speed, health, color, im
       angle = math.rad(startAngle),
       speed = speed,
       hp = health,
+      maxhp = health,
       color = color,
       image = image,
       scale = radius * 2 / image:getWidth(),
@@ -87,7 +90,9 @@ function planet.draw()
     if v.isSun and drunkMode == 1 then img = image.sun_sunglasses end
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
+    crack = math.floor(((v.maxhp - v.hp) / v.maxhp) * 5 + 0.5)
     love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
+    love.graphics.draw(image["cracks"..math.min(5,crack)], v.x - v.r, v.y - v.r, 0, v.scale)
     --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end

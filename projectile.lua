@@ -57,7 +57,7 @@ end
 function projectile.draw()
   love.graphics.setColor(255,255,255)
   for _, pr in pairs(p.projectiles) do
-    love.graphics.line(pr.ox, pr.oy, pr.x, pr.y)
-    --love.graphics.draw(pr.img, pr.x, pr.y, pr.r, pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
+    --love.graphics.line(pr.ox, pr.oy, pr.x, pr.y)
+    love.graphics.draw(pr.img, pr.x, pr.y, (math.atan(pr.vy/pr.vx)), pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
   end
 end
