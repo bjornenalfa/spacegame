@@ -17,15 +17,42 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
   return newPlayer
 end
 
-function p.keypressed(key)
+function p.update(dt)
   for _,v in pairs(p.players) do
+    if love.keyboard.isDown(v.keyFire) then
+      pt = v.planet
+      x = pt.x + math.cos(v.towerAngle) * pt.r + 10
+      y = pt.y + math.sin(v.towerAngle) * pt.r + 10
+      projectile.new(image.missile_atomicbomb, 1, x, y, 20, 20, 1000, v.towerAngle + v.fireAngle, 90)
+    end
+    if love.keyboard.isDown(v.keyLeft) then
+      v.fireAngle = v.fireAngle - math.pi * dt * 0.5
+      if (v.fireAngle < -math.pi/2) then
+        v.fireAngle = -math.pi/2
+      end
+    end
+    if love.keyboard.isDown(v.keyRight) then
+      v.fireAngle = v.fireAngle + math.pi * dt * 0.5
+      if (v.fireAngle > math.pi/2) then
+        v.fireAngle = math.pi/2
+      end
+    end
+  end
+end
+
+function p.keypressed(key)
+  --[[for _,v in pairs(p.players) do
     if key == v.keyFire then
       pt = v.planet
       x = pt.x + math.cos(v.towerAngle) * pt.r + 10
       y = pt.y + math.sin(v.towerAngle) * pt.r + 10
-      projectile.new(image.missile_atomicbomb, 1, x, y, 20, 20, 200, v.fireAngle, 100)
+      projectile.new(image.missile_atomicbomb, 1, x, y, 20, 20, 1000, v.fireAngle, 90)
+    elseif key == v.keyLeft then
+      v.fireAngle = v.fireAngle - math.pi / 8
+    elseif key == v.keyRight then
+      v.fireAngle = v.fireAngle + math.pi / 8
     end
-  end
+  end]]
 end
 
 function p.draw()
