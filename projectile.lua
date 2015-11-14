@@ -1,4 +1,4 @@
-require "planet"
+--require "planet" -- not required since imported in main.lua
 
 projectile = {}
 local p = projectile

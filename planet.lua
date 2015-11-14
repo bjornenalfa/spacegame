@@ -2,11 +2,28 @@ require "image"
 
 planet = {}
 local p = planet
+p.__index = p --Inheritance!
 
 p.planets = {}
+p.suns = {}
 
-function planet.new(mass, distance, radius, angle, speed, health, colorRed, colorGreen, colorBlue)
-  table.insert(p.planets, {
+function planet.newSun(mass, x, y, radius, color, image)
+  newSun = {
+    m = mass,
+    r = radius,
+    x = x,
+    y = y,
+    color = color,
+    image = image,
+    moons = {}
+  }
+  table.insert(p.planets, newSun)
+  setmetatable(newSun, planet)
+  return newSun
+end
+
+function planet.new(mass, distance, radius, angle, speed, health, color, image)
+  newPlanet = {
       m = mass, 
       d = distance, 
       r = radius, 
@@ -15,10 +32,17 @@ function planet.new(mass, distance, radius, angle, speed, health, colorRed, colo
       angle = 0,
       speed = speed,
       hp = health,
-      cRed = colorRed,
-      cGreen = colorGreen,
-      cBlue = colorBlue
-  })
+      color = color,
+      image = image,
+      moons = {}
+  }
+  table.insert(p.planets, newPlanet)
+  setmetatable(newPlanet, planet)
+  return newPlanet
+end
+
+function planet:addMoon(moon)
+  table.insert(self.moons, moon)
 end
 
 function planet.getPlayerOne()
@@ -32,16 +56,24 @@ end
 
 function planet.update(dt)
   for _,v in pairs(p.planets) do
+    planet.updateMoons(v.x, v.y, v.moons, dt)
+  end
+end
+
+function planet.updateMoons(cx, cy, moons, dt)
+  for _,v in pairs(moons) do
     v.angle = v.angle + dt*v.speed
-    v.x = 400+math.cos(v.angle)*v.d
-    v.y = 300+math.sin(v.angle)*v.d
+    v.x = cx+math.cos(v.angle)*v.d
+    v.y = cy+math.sin(v.angle)*v.d
+    planet.updateMoons(v.x, v.y, v.moons, dt)
   end
 end
 
 function planet.draw()
+  
   for _,v in pairs(p.planets) do
-    love.graphics.setColor(v.cRed, v.cGreen, v.cBlue)
-    img = image.planet_1
+    love.graphics.setColor(v.color)
+    img = v.image
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
     love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.r * 2 / imgWidth, v.r * 2 / imgHeight)
