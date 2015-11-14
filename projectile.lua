@@ -55,15 +55,15 @@ function projectile.update(dt)
       if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
         table.insert(projectileRemovals, projectileIndex)
         table.insert(projectileRemovals, i)
+      explosions.new(pr.x, pr.y, 0.2, 200)
       end
     end
-    for i = #projectileRemovals, 1, -1 do
-      print(projectileRemovals[i])
-      table.remove(p.projectiles, projectileRemovals[i])
-    end
-    for i = #collisions, 1, -1 do
-      table.remove(p.projectiles, collisions[i])
-    end
+  end
+  for i = #projectileRemovals, 1, -1 do
+    table.remove(p.projectiles, projectileRemovals[i])
+  end
+  for i = #collisions, 1, -1 do
+    table.remove(p.projectiles, collisions[i])
   end
 end
 
