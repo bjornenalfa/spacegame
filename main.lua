@@ -4,7 +4,7 @@ require "camera"
 require "image"
 
 function love.load()
-  projectile.new(image.missile_atomicbomb, 0.01, 10, 10, 20, 20, 200, 0, 90)
+  projectile.new(image.missile_atomicbomb, 0.01, -360, 250, 20, 20, 200, 0, 90)
   -- mass, x, y, radius, color, image
   sun = planet.newSun(100, 0, 0, 200, {255, 255, 255}, image.sun)
   -- mass, distance, radius, angle, speed, health, color, image

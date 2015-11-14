@@ -18,19 +18,20 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
 end
 
 function projectile.update(dt)
-  for _, pr in pairs(p.projectiles) do
+  collisions = {}
+  for projectileIndex, pr in pairs(p.projectiles) do
     pr.x = pr.x + (pr.vx * dt)
     pr.y = pr.y + (pr.vy * dt)
-    --[[for _, pl in pairs(planet) do
-      print(pl)
-      break
-      if math.pow(math.pow(pl.x - pr.x, 2) + math.pow(pl.y - pr.y, 2), 0.5) < pl.r then
-        pl.hp = pl.hp - pr.d
-        table.remove(pr)
+    for _, pl in pairs(planet.planets) do
+      if math.sqrt((pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y)) < pl.r then
+        --pl.hp = pl.hp - pr.d
+        table.insert(collisions, projectileIndex)
         break
       end
     end
-    ]]--
+  end
+  for i = #collisions, 1, -1 do
+    table.remove(p.projectiles, collisions[i])
   end
 end
 
