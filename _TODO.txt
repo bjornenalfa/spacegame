@@ -1,0 +1,9 @@
+Fler events (se _EventList.txt)
+Rymdskepp (ger -pts om träffad)
+Flera rundor
+Reset-funktion
+Bugfix för fullRemove
+Explosioner påverkar projektiler
+Visa poäng
+Ge poäng för asteroider
+Laser
