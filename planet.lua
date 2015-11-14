@@ -24,7 +24,7 @@ function planet.newSun(mass, x, y, radius, color, image)
   return newSun
 end
 
-function planet.new(mass, distance, radius, startAngle, speed, health, color, image)
+function planet.new(mass, distance, radius, startAngle, speed, selfRotationSpeed, health, color, image)
   newPlanet = {
       m = mass, 
       d = distance, 
@@ -33,6 +33,8 @@ function planet.new(mass, distance, radius, startAngle, speed, health, color, im
       y = 0,
       angle = math.rad(startAngle),
       speed = speed,
+      selfRotation = 0,
+      selfRotationSpeed = selfRotationSpeed,
       hp = health,
       maxhp = health,
       color = color,
@@ -81,6 +83,7 @@ function planet.updateMoons(cx, cy, moons, dt)
     v.angle = v.angle + dt*v.speed
     v.x = cx+math.cos(v.angle)*v.d
     v.y = cy+math.sin(v.angle)*v.d
+    v.selfRotation = v.selfRotation + v.selfRotationSpeed * dt
     planet.updateMoons(v.x, v.y, v.moons, dt)
   end
 end
@@ -94,8 +97,11 @@ function planet.draw()
     imgWidth = img:getWidth()
     imgHeight = img:getHeight()
     crack = math.floor(((v.maxhp - v.hp) / v.maxhp) * 5 + 0.5)
-    love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
-    love.graphics.draw(image["cracks"..math.min(5,crack)], v.x - v.r, v.y - v.r, 0, v.scale)
+    --love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
+    --love.graphics.draw(image["cracks"..math.min(5,crack)], v.x - v.r, v.y - v.r, 0, v.scale)
+    love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
+    love.graphics.draw(image["cracks"..math.min(5,crack)], v.x, v.y,
+          v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
     --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end
