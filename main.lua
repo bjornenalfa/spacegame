@@ -51,6 +51,8 @@ function love.load()
   background.load()
   
   love.graphics.setBackgroundColor(0, 0, 0)
+  
+  sound.play("menu")
 end
 
 -- 0 = normal mode, 1 = drunk mode
@@ -58,21 +60,25 @@ drunkMode = false
 drawMenu = true
 time = 0
 function love.update(dt)
-  if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
-    asteroid.spawn()
-  end
-  time = time + dt
   camera.update(dt)
-  planet.update(dt)
-  player.update(dt)
-  projectile.update(dt)
-  explosions.update(dt)
-  asteroid.update(dt)
-  events.update(dt)
+  if not drawMenu then
+    if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
+      asteroid.spawn()
+    end
+    time = time + dt
+    planet.update(dt)
+    player.update(dt)
+    projectile.update(dt)
+    explosions.update(dt)
+    asteroid.update(dt)
+    events.update(dt)
+  end
 end
 
 function love.keypressed(key)
-  player.keypressed(key)
+  if not drawMenu then
+    player.keypressed(key)
+  end
   if key == "escape" then
     love.event.quit()
   elseif key == " " then
@@ -86,7 +92,8 @@ end
 
 function startGame()
   drawMenu = false
-  sound.battle3:play()
+  sound.menu:stop()
+  sound.play("battle2")
 end
 
 function love.draw()

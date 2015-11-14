@@ -26,6 +26,9 @@ s.battle2:setVolume(0.4)
 s.addSound("battle3", ".ogg")
 s.battle3:setVolume(0.5)
 s.addSound("sandstorm", ".mp3")
+s.addSound("menu", ".ogg")
+s.menu:setVolume(0.3)
+
 
 s.addStaticSound("missile_shoot", ".wav")
 s.addStaticSound("laser_shoot", ".wav")
