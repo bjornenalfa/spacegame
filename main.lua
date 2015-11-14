@@ -3,7 +3,7 @@ require "projectile"
 require "camera"
 require "image"
 require "player"
---require "background"
+require "background"
 
 function love.load()
   projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
@@ -50,7 +50,7 @@ end
 
 function love.draw()
   camera.draw()
-  --background.draw()
+  background.draw()
   planet.draw()
   player.draw()
   projectile.draw()
