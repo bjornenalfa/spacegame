@@ -11,7 +11,8 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
     towerAngle = math.rad(towerAngle),
     keyLeft = keyLeft,
     keyRight = keyRight,
-    keyFire = keyFire
+    keyFire = keyFire,
+    cooldown = 0
   }
   table.insert(p.players, newPlayer)
   return newPlayer
@@ -19,7 +20,9 @@ end
 
 function p.update(dt)
   for _,v in pairs(p.players) do
-    if love.keyboard.isDown(v.keyFire) then
+    v.cooldown = v.cooldown - dt
+    if love.keyboard.isDown(v.keyFire) and v.cooldown <= 0 then
+      v.cooldown = 1
       pt = v.planet
       x = pt.x + math.cos(v.towerAngle) * pt.r + 10
       y = pt.y + math.sin(v.towerAngle) * pt.r + 10
