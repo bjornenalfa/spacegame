@@ -12,7 +12,8 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
     keyLeft = keyLeft,
     keyRight = keyRight,
     keyFire = keyFire,
-    cooldown = 0
+    cooldown = 0,
+    score = 0
   }
   table.insert(p.players, newPlayer)
   return newPlayer
@@ -26,7 +27,7 @@ function p.update(dt)
       pt = v.planet
       x = pt.x + math.cos(v.towerAngle) * (pt.r + 10)
       y = pt.y + math.sin(v.towerAngle) * (pt.r + 10)
-      projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle, 10)
+      projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle, 10, v)
     end
     if love.keyboard.isDown(v.keyLeft) then
       v.fireAngle = v.fireAngle - math.pi * dt * 0.5

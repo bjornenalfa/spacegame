@@ -3,7 +3,7 @@ local p = projectile
 
 p.projectiles = {}
 
-function projectile.new(image, mass, locationX, locationY, length, width, speed, angle, damage)
+function projectile.new(image, mass, locationX, locationY, length, width, speed, angle, damage, owner)
   table.insert(p.projectiles, {
       img = image,
       m = mass,
@@ -16,7 +16,8 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
       vx = speed * math.cos(angle),
       vy = speed * math.sin(angle),
       d = damage,
-      duration = 0
+      duration = 0,
+      owner = owner
   })
   sound.missile_shoot:rewind()
   sound.missile_shoot:play()
@@ -52,6 +53,17 @@ function projectile.update(dt)
         if (pl.x - pr.x)*(pl.x - pr.x) + (pl.y - pr.y)*(pl.y - pr.y) < pl.r*pl.r then
           if not pl.isSun then
             pl.hp = pl.hp - pr.d
+            belongsToPlayer = false
+            for _, plr in pairs(player.players) do
+              if plr.planet == pl then
+                belongsToPlayer = true
+                break
+              end
+            end
+            if belongsToPlayer then
+              pr.owner.score = pr.owner.score + 100 * (3-pr.duration)
+              print(pr.owner.score)
+            end
           end
           table.insert(collisions, projectileIndex)
           collided = true
