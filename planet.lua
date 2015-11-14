@@ -13,7 +13,8 @@ function planet.newSun(mass, x, y, radius, color, image)
     y = y,
     color = color,
     image = image,
-    moons = {}
+    moons = {},
+    isSun = true
   }
   table.insert(p.planets, newSun)
   setmetatable(newSun, planet)
@@ -32,7 +33,8 @@ function planet.new(mass, distance, radius, angle, speed, health, color, image)
       hp = health,
       color = color,
       image = image,
-      moons = {}
+      moons = {},
+      isSun = false
   }
   table.insert(p.planets, newPlanet)
   setmetatable(newPlanet, planet)
