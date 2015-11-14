@@ -53,7 +53,7 @@ end
 
 function love.draw()
   camera.draw()
---  background.draw()
+  background.draw()
   planet.draw()
   player.draw()
   projectile.draw()
