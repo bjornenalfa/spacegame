@@ -75,6 +75,8 @@ function p.draw()
     cannonImg = image.cannonBig
     cannonWidth = cannonImg:getWidth()
     cannonHeight = cannonImg:getHeight()
+    x = pt.x + math.cos(v.towerAngle + pt.selfRotation) * (pt.r + 8)
+    y = pt.y + math.sin(v.towerAngle + pt.selfRotation) * (pt.r + 8)
     love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, pt.scale, pt.scale, 0, cannonImg:getHeight()/2)
     -- love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, cannonWidth/ cannonImg:getWidth(), cannonHeight/ cannonImg:getHeight(), 0, cannonImg:getHeight()/2)
   end
