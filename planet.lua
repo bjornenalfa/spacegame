@@ -57,8 +57,15 @@ function planet.getPlayerOne()
 end
 
 function planet.update(dt)
-  for _,v in pairs(p.planets) do
+  destroyed = {}
+  for k,v in pairs(p.planets) do
     planet.updateMoons(v.x, v.y, v.moons, dt)
+    if not v.isSun and v.hp < 1 then
+      table.insert(destroyed, k)
+    end
+  end
+  for i = #destroyed, 1, -1 do
+    planet.fullRemove(p.planets[destroyed[i]])
   end
 end
 
@@ -81,4 +88,31 @@ function planet.draw()
     love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
     --love.graphics.circle("line", v.x, v.y, v.r)
   end
+end
+
+function planet.fullRemove(target)
+  if target.moons == {} then
+    for k, v in pairs(p.planets) do
+      if v == target then
+        table.remove(p.planets, k)
+        assert(not elem(v, p.planets), "Planet not removed.")
+        return
+      end
+    end
+    assert(false, "No such item in p.planets")
+  else
+    for _, v in pairs(target.moons) do
+      assert(elem(v, p.planets), "Moon not in planet list")
+      planet.fullRemove(v)
+      -- assert(not elem(v, p.planets), "Moon not removed")
+    end
+    target.moons = {}
+  end
+end
+
+function elem(item, list)
+  for _, v in pairs(list) do
+    if v == item then return true end
+  end
+  return false
 end
