@@ -16,7 +16,7 @@ function explosions.new(x, y, time, radius)
   return newEx
 end
 
-frames = 5
+frames = 3
 function explosions.update(dt)
   toRemove = {}
   for _,v in pairs(e.explosions) do
@@ -35,7 +35,7 @@ end
 function explosions.draw()
   love.graphics.setColor(255,255,255)
   for _,v in pairs(e.explosions) do
-    img = image["explosion"..v.frame]
+    img = image["planetexplosion"..v.frame]
     w = img:getWidth()
     h = img:getHeight()
     love.graphics.draw(img, x, y, 0, v.r/w, v.r/h, w/2, h/2)

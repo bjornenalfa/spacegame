@@ -64,12 +64,14 @@ function planet.update(dt)
   destroyed = {}
   for k,v in pairs(p.planets) do
     planet.updateMoons(v.x, v.y, v.moons, dt)
-    if not v.isSun and v.hp < 1 then
+    if not v.isSun and v.hp <= 0 then
       table.insert(destroyed, k)
     end
   end
   for i = #destroyed, 1, -1 do
-    planet.fullRemove(p.planets[destroyed[i]])
+    pl = p.planets[destroyed[i]]
+    explosions.new(pl.x, pl.y, 0.2, pl.r)
+    planet.fullRemove(pl)
     sound.planet_explode:play()
   end
 end
