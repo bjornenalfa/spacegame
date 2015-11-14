@@ -3,24 +3,25 @@ local p = projectile
 
 p.projectiles = {}
 
-function projectile.new(mass, locationX, locationY, length, width, angle, speed, damage)
+function projectile.new(image, mass, locationX, locationY, length, width, speed, angle, damage)
   table.insert(p.projectiles, {
+      img = image,
       m = mass,
       x = locationX,
       y = locationY,
       l = length,
       w = width,
-      t = angle,
-      v = speed,
+      vx = speed * math.cos(angle),
+      vy = speed * math.sin(angle),
       d = damage
   })
 end
 
 function projectile.update(dt)
   for _, pr in pairs(p.projectiles) do
-    pr.x = pr.x + (pr.v * dt * math.sin(pr.t))
-    pr.y = pr.y + (pr.v * dt * math.cos(pr.t))
-    for _, pl in pairs(planet) do
+    pr.x = pr.x + (pr.vx * dt)
+    pr.y = pr.y + (pr.vy * dt)
+    --[[for _, pl in pairs(planet) do
       print(pl)
       break
       if math.pow(math.pow(pl.x - pr.x, 2) + math.pow(pl.y - pr.y, 2), 0.5) < pl.r then
@@ -29,12 +30,12 @@ function projectile.update(dt)
         break
       end
     end
+    ]]--
   end
 end
 
 function projectile.draw()
   for _, pr in pairs(p.projectiles) do
-    img = image.projectile1
-    love.graphics.draw(pr.x, pr.y, pr.r, sx, sy, ox, oy)
+    love.graphics.draw(pr.img, pr.x, pr.y, pr.r, pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
   end
 end
