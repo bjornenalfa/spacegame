@@ -1,5 +1,6 @@
 require "planet"
 require "camera"
+require "image"
 
 function love.load()
   love.graphics.setBackgroundColor(0,0,0)
@@ -18,7 +19,7 @@ end
 
 function love.draw()
   camera.draw()
-  love.graphics.setColor(255,255,0)
-  love.graphics.circle("fill",400,300,100)
+  love.graphics.setColor(255, 255, 255)
+  love.graphics.draw(image.sun, 0, 0)
   planet.draw()
 end
