@@ -9,6 +9,7 @@ require "explosions"
 require "menu"
 require "asteroid"
 require "font"
+require "events"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
@@ -17,7 +18,7 @@ function love.load()
   
   -- suns and planets
   -- mass, x, y, radius, color, image
-  sun = planet.newSun(1e8, 0, 0, 100, {255, 255, 255}, image.sun)
+  sun = planet.newSun(1e8, 0, 0, 150, {255, 255, 255}, image.sun)
   -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
   planetDuoBase = planet.new( 1,      200,  0,      270, -0.5,   0,   100000, {0, 0, 0},  image.planet_3)
   planetDuo1 = planet.new(    4e6,    30,   20,     180,  1,     2,   100,    {255, 100, 200},  image.planet_5)
@@ -69,6 +70,7 @@ function love.update(dt)
   projectile.update(dt)
   explosions.update(dt)
   asteroid.update(dt)
+  events.update(dt)
 end
 
 function love.keypressed(key)
@@ -79,7 +81,7 @@ function love.keypressed(key)
     if drawMenu then
       drawMenu = false
     else
-    --events.startEvent(1, 5)
+      events.startEvent(1, 5)
     end
   end
 end
@@ -96,5 +98,6 @@ function love.draw()
     projectile.draw()
     explosions.draw()
     asteroid.draw()
+    events.draw()
   end
 end
