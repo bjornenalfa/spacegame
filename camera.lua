@@ -7,6 +7,8 @@ c.x = 0
 c.y = 0
 
 function camera.update()
+  c.width = love.window.getWidth()
+  c.height = love.window.getHeight()
   c.x, c.y = planet.getPlayerOne()
   -- bad zoom
   c.x = c.x * 0.3 + c.width/2
