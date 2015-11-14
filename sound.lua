@@ -12,3 +12,4 @@ function addStaticSound(name, ext)
 end
 
 addSound("battle1", ".ogg")
+addSound("sandstorm", ".mp3")

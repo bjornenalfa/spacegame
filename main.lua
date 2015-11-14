@@ -51,6 +51,8 @@ function love.keypressed(key)
     love.event.quit()
   elseif key == " " then
     drunkMode = 1
+    sound.battle1:stop()
+    sound.sandstorm:play()
   end
 end
 
