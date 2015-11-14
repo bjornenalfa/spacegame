@@ -23,6 +23,7 @@ end
 
 function projectile.update(dt)
   collisions = {}
+  projectileRemovals = {}
   for projectileIndex, pr in pairs(p.projectiles) do
     pr.ox = pr.x
     pr.oy = pr.y
@@ -50,7 +51,6 @@ function projectile.update(dt)
       end
     end
     
-    projectileRemovals = {}
     for i, other in pairs(p.projectiles) do
       if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 10*10 and pr ~= other then
         table.insert(projectileRemovals, projectileIndex)
