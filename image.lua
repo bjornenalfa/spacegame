@@ -13,6 +13,7 @@ addImage("missile_atomicbombSmall")
 addImage("FireStationBase")
 addImage("FireStationBase_cannon")
 addImage("cannonSmall")
+addImage("cannonBig")
 
 for i = 0,5 do
   addImage("cracks"..i)

@@ -70,9 +70,9 @@ function p.draw()
     offX = width * 0.5
     offY = height * 0.5
     love.graphics.draw(img, x, y, v.towerAngle, pt.scale, pt.scale, offX, offY)
-    cannonImg = image.cannonSmall
-    cannonWidth = 30
-    cannonHeight = 20
+    cannonImg = image.cannonBig
+    cannonWidth = cannonImg:getWidth()
+    cannonHeight = cannonImg:getHeight()
     love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, pt.scale, pt.scale, 0, cannonImg:getHeight()/2)
     -- love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, cannonWidth/ cannonImg:getWidth(), cannonHeight/ cannonImg:getHeight(), 0, cannonImg:getHeight()/2)
   end
