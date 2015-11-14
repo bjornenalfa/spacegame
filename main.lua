@@ -85,9 +85,9 @@ function love.keypressed(key)
 end
 
 function love.draw()
-  if not drunkMode then background.drawNormal() print("test 1") end
+  if not drunkMode then background.drawNormal() end
   camera.draw()
-  if drunkMode then background.drawDrunk() print("test 2") end
+  if drunkMode then background.drawDrunk() end
   if drawMenu then
     menu.draw()
   else
