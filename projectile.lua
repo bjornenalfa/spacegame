@@ -17,6 +17,8 @@ function projectile.new(image, mass, locationX, locationY, length, width, speed,
       vy = speed * math.sin(angle),
       d = damage
   })
+  sound.missile_shoot:rewind()
+  sound.missile_shoot:play()
 end
 
 function projectile.update(dt)
