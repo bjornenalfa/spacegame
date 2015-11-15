@@ -7,7 +7,7 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 6
+e.amount = 8
 e.recommended = {10, 20, 25, 10, 10, 15, 15, 50}
 
 cars = false
