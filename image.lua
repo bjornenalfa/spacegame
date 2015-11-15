@@ -19,6 +19,7 @@ addImage("FireStationBase")
 addImage("FireStationBase_cannon")
 addImage("cannonSmall")
 addImage("cannonBig")
+addImage("spacecar")
 
 for i = 0,5 do
   addImage("cracks"..i)
