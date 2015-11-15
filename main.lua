@@ -67,7 +67,13 @@ function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
   elseif not drawMenu then
-    player.keypressed(key)
+    if key == "k" and love.keyboard.isDown("lctrl") then
+      player.players[1].planet.hp = 0
+    elseif key == "k" and love.keyboard.isDown("rctrl") then
+      player.players[2].planet.hp = 0
+    else
+      player.keypressed(key)
+    end
   else
     if not pcall(function() startGame(tonumber(key)) end) then
       startGame("random")
