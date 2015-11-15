@@ -90,7 +90,7 @@ function startGame(lvl)
   music:setLooping(true)
   sound.play(music)
   if lvl == "random" then
-    map.load(math.random(1,4))
+    map.load(math.random(1,7))
   else
     map.load(lvl)
   end

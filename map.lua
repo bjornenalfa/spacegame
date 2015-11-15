@@ -48,19 +48,21 @@ function m.load(i)
     camera.mapScale = 0.75
     -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
   elseif i == 3 then
-    p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
-    p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)
-    sun = planet.newSun(5e7, 0, 0, 150, {255, 255, 255}, image.sun)
+    p1sun = planet.newSun(2e7, -300, 200, 75, {255, 255, 255}, image.sun)
+    p2sun = planet.newSun(2e7, 300, -200, 75, {255, 255, 255}, image.sun)
     p1p = planet.new(       2e7,   110,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_5)
     p1sun:addMoon(p1p)
     p2p = planet.new(       2e7,   110,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_3)
     p2sun:addMoon(p2p)
-    planet5 = planet.new(       12e6,   150,  35,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_1)
-    sun:addMoon(planet5)
+    planet5 = planet.new(       12e6,   350,  60,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_1)
+    planet6 = planet.new(       12e6,   350,  60,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_3)
+    p1sun:addMoon(planet5)
+    p2sun:addMoon(planet6)
     player1.planet = p1p
     player2.planet = p2p
-    camera.scale = 0.1
-    camera.mapScale = 0.75
+    camera.scale = 2
+    camera.mapScale = 0.6
+    -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
   elseif i == 4 then
     p1sun = planet.newSun(2e7, -420, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 420, 0, 75, {255, 255, 255}, image.sun)
@@ -75,6 +77,67 @@ function m.load(i)
     player2.planet = p2p
     camera.scale = 0.1
     camera.mapScale = 0.6
+  elseif i == 5 then
+    sun = planet.newSun(6e7, 0, 0, 150, {255, 255, 255}, image.sun)
+    p1p = planet.new(       2e7,   300,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_5)
+    sun:addMoon(p1p)
+    p2p = planet.new(       2e7,   300,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_3)
+    sun:addMoon(p2p)
+    planet5 = planet.new(       12e6,   400,  60,     100, -0.5,   0.5, 70,     {100, 255, 100},  image.planet_1)
+    planet6 = planet.new(       2e6,   500,  40,     130, 0.7,   0.5, 70,     {100, 255, 100},  image.planet_3)
+    planet7 = planet.new(       2e6,   200,  30,     130, 0.8,   0.5, 70,     {100, 255, 100},  image.planet_5)
+    sun:addMoon(planet5)
+    sun:addMoon(planet6)
+    sun:addMoon(planet7)
+    player1.planet = p1p
+    player2.planet = p2p
+    player1.towerAngle = math.pi
+    player2.towerAngle = 0
+    camera.scale = 2
+    camera.mapScale = 0.6
+  elseif i == 6 then
+    p1sun = planet.newSun(4e7, -300, 200, 100, {255, 255, 255}, image.sun)
+    p2sun = planet.newSun(4e7, 300, -200, 100, {255, 255, 255}, image.sun)
+    insun1 = planet.newSun(-3e7, -350, -250, 75, {255, 255, 255}, image.inverter)
+    insun2 = planet.newSun(-3e7, 350, 250, 75, {255, 255, 255}, image.inverter)
+    p1p = planet.new(       2e7,   200,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    p1sun:addMoon(p1p)
+    p2p = planet.new(       2e7,   200,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    p2sun:addMoon(p2p)
+    planet5 = planet.new(       12e6,   350,  40,     135, -1.5,   0.5, 70,     {255, 255, 255},  image.planet_1)
+    planet6 = planet.new(       12e6,   350,  40,     135, -1.5,   0.5, 70,     {255, 255, 255},  image.planet_1)
+    p1sun:addMoon(planet5)
+    p2sun:addMoon(planet6)
+    player1.planet = p1p
+    player2.planet = p2p
+    camera.scale = 2
+    camera.mapScale = 0.6
+  elseif i == 7 then
+    sun = planet.newSun(4e7, 0, 0, 125, {255, 255, 255}, image.sun)
+    insun1 = planet.newSun(-8e7, -500, -400, 75, {255, 255, 255}, image.inverter)
+    insun2 = planet.newSun(-8e7, 500, 400, 75, {255, 255, 255}, image.inverter)
+    insun3 = planet.newSun(-8e7, -500, 400, 75, {255, 255, 255}, image.inverter)
+    insun4 = planet.newSun(-8e7, 500, -400, 75, {255, 255, 255}, image.inverter)
+    insun5 = planet.newSun(-8e7, 0, -600, 75, {255, 255, 255}, image.inverter)
+    insun6 = planet.newSun(-8e7, 0, 600, 75, {255, 255, 255}, image.inverter)
+    insun7 = planet.newSun(-8e7, 750, 0, 75, {255, 255, 255}, image.inverter)
+    insun8 = planet.newSun(-8e7, -750, 0, 75, {255, 255, 255}, image.inverter)
+    p1p = planet.new(       5e6,   300,  35,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)
+    sun:addMoon(p1p)
+    p2p = planet.new(       5e6,   300,  35,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    sun:addMoon(p2p)
+    planet5 = planet.new(       2e7,   400,  75,     100, -0.7,   0.5, 70,     {100, 255, 100},  image.planet_1)
+    planet6 = planet.new(       2e6,   500,  40,     130, 0.7,   0.5, 70,     {100, 255, 100},  image.planet_3)
+    planet7 = planet.new(       -5e6,   200,  35,     130, 1.5,   0.5, 70,     {255, 255, 255},  image.inverter)
+    sun:addMoon(planet5)
+    sun:addMoon(planet6)
+    sun:addMoon(planet7)
+    player1.planet = p1p
+    player2.planet = p2p
+    player1.towerAngle = math.pi
+    player2.towerAngle = 0
+    camera.scale = 2
+    camera.mapScale = 0.5
   else error("Invalid level ID")
   end
 end
