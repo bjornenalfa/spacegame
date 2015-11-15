@@ -86,8 +86,9 @@ end
 function startGame(lvl)
   drawMenu = false
   sound.menu:stop()
-  sound.play("battle2")
-  sound.battle2:setLooping(true)
+  music = sound["battle"..math.random(1,3)]
+  music:setLooping(true)
+  sound.play(music)
   if lvl == "random" then
     map.load(math.random(1,4))
   else
