@@ -32,7 +32,6 @@ function love.load()
   sound.play("menu")
 end
 
--- 0 = normal mode, 1 = drunk mode
 drunkMode = false
 timeLeftToMenu = -1
 drawMenu = true
