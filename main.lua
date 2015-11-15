@@ -63,7 +63,7 @@ function love.keypressed(key)
     end
   else
     if not pcall(function() startGame(tonumber(key)) end) then
-      startGame(1)
+      startGame("random")
     end
     --map.load(1)
     --events.startEvent(2, 10)
@@ -74,7 +74,11 @@ function startGame(lvl)
   drawMenu = false
   sound.menu:stop()
   sound.play("battle"..math.random(1,3))
-  map.load(lvl)
+  if lvl == "random" then
+    map.load(math.random(1,3))
+  else
+    map.load(lvl)
+  end
 end
 
 function love.draw()
