@@ -5,8 +5,8 @@ c.width = love.window.getWidth()
 c.height = love.window.getHeight()
 c.x = 0
 c.y = 0
-c.scale = 0.4
-c.mapScale = 0.5
+c.scale = 0.5
+c.mapScale = 0.7
 
 function camera.update()
   c.width = love.window.getWidth()
