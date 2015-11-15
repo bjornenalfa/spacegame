@@ -64,6 +64,8 @@ function love.keypressed(key)
       --map.load(1)
       events.startEvent(2, 10)
     end
+  elseif key == "1" then
+    player.players[1].planet.hp = 0
   end
 end
 
