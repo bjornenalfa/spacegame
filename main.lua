@@ -75,6 +75,7 @@ function startGame()
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
+  sound.battle2:setLooping(true)
   map.load(1)
 end
 
