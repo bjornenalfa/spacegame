@@ -74,7 +74,7 @@ function startGame()
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
-  map.load(1)
+  map.load(7)
 end
 
 function love.draw()
