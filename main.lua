@@ -20,8 +20,8 @@ function love.load()
   
   -- players
   -- name, planet
-  player1 = player.newPlayer("Bob", {}, -90, "a", "d", "w")
-  player2 = player.newPlayer("SuperChungusIV", {}, 90, "left", "right", "up")
+  player1 = player.newPlayer("Red", {}, -90, "a", "d", "w", {255, 120, 120})
+  player2 = player.newPlayer("Blue", {}, 90, "left", "right", "up", {120, 120, 255})
   
   background.load()
   

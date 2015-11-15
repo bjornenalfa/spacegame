@@ -3,7 +3,7 @@ local p = player
 
 p.players = {}
 
-function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
+function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire, color)
   newPlayer = {
     name = name,
     planet = planet,
@@ -13,7 +13,8 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
     keyRight = keyRight,
     keyFire = keyFire,
     cooldown = 0,
-    score = 0
+    score = 0,
+    color = color,
   }
   table.insert(p.players, newPlayer)
   return newPlayer
@@ -63,9 +64,9 @@ function p.keypressed(key)
 end
 
 function p.draw()
-  love.graphics.setColor(255,255,255)
   for _,v in pairs(p.players) do
     if v.planet.hp > 0 then
+      love.graphics.setColor(v.color)
       img = image.FireStationBase
       width = img:getWidth()
       height = img:getHeight()
