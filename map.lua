@@ -30,6 +30,8 @@ function m.load(i)
     planet1:addMoon(moon2)
     player1.planet = planet1
     player2.planet = planet2
+    camera.scale = 0.1
+    camera.mapScale = 0.5
   elseif i == 2 then
     p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)

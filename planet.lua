@@ -63,16 +63,6 @@ function planet:addMoons(...)
   end
 end
 
-function planet.getPlayerOne()
-  if true then return 0,0 end
-  if #p.planets > 0 then
-    p1 = p.planets[1]
-    return -p1.x, -p1.y
-  else
-    return 0, 0
-  end
-end
-
 function planet.update(dt)
   destroyed = {}
   for k,v in pairs(p.planets) do

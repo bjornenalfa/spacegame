@@ -5,12 +5,14 @@ c.width = love.window.getWidth()
 c.height = love.window.getHeight()
 c.x = 0
 c.y = 0
-c.scale = 0.7
+c.scale = 0.4
+c.mapScale = 0.5
 
 function camera.update()
   c.width = love.window.getWidth()
   c.height = love.window.getHeight()
-  c.x, c.y = planet.getPlayerOne()
+  scaleNeed = c.mapScale - c.scale
+  c.scale = c.scale + scaleNeed / 40
 end
 
 function camera.draw()
