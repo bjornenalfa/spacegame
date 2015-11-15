@@ -27,7 +27,6 @@ end
 function p.update(dt)
   for _,v in pairs(p.players) do
     if v.planet.removed then
-      print("test")
       if timeLeftToMenu == -1 then
         timeLeftToMenu = 4
         -- Even worse code...

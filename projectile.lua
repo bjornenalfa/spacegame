@@ -61,7 +61,6 @@ function projectile.update(dt)
             end
             if belongsToPlayer then
               pr.owner.score = pr.owner.score + 100 * pr.duration
-              print(pr.owner.score)
             end
           end
           table.insert(collisions, projectileIndex)
