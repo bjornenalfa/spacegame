@@ -32,20 +32,6 @@ function m.load(i)
     player2.planet = planet2
     camera.scale = 5
     camera.mapScale = 0.65
-  elseif i == 4 then
-    p1sun = planet.newSun(2e7, -420, 0, 75, {255, 255, 255}, image.sun)
-    p2sun = planet.newSun(2e7, 420, 0, 75, {255, 255, 255}, image.sun)
-    sun = planet.newSun(6e7, 0, 0, 100, {255, 255, 255}, image.sun)
-    p1p = planet.new(       2e7,   170,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
-    p1sun:addMoon(p1p)
-    p2p = planet.new(       2e7,   170,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)
-    p2sun:addMoon(p2p)
-    planet5 = planet.new(       12e6,   150,  35,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_2)
-    sun:addMoon(planet5)
-    player1.planet = p1p
-    player2.planet = p2p
-    camera.scale = 0.1
-    camera.mapScale = 0.6
   elseif i == 2 then
     p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)
@@ -75,5 +61,19 @@ function m.load(i)
     player2.planet = p2p
     camera.scale = 0.1
     camera.mapScale = 0.75
+  elseif i == 4 then
+    p1sun = planet.newSun(2e7, -420, 0, 75, {255, 255, 255}, image.sun)
+    p2sun = planet.newSun(2e7, 420, 0, 75, {255, 255, 255}, image.sun)
+    sun = planet.newSun(6e7, 0, 0, 100, {255, 255, 255}, image.sun)
+    p1p = planet.new(       2e7,   170,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    p1sun:addMoon(p1p)
+    p2p = planet.new(       2e7,   170,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)
+    p2sun:addMoon(p2p)
+    planet5 = planet.new(       12e6,   150,  35,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_2)
+    sun:addMoon(planet5)
+    player1.planet = p1p
+    player2.planet = p2p
+    camera.scale = 0.1
+    camera.mapScale = 0.6
   end
 end
