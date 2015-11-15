@@ -35,11 +35,12 @@ drunkMode = false
 drawMenu = true
 time = 0
 timeMultiplier = 1
+maxAsteroids = 20
 function love.update(dt)
   dt = dt * timeMultiplier
   camera.update(dt)
   if not drawMenu then
-    if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
+    if #asteroid.asteroids < maxAsteroids and math.random(0,1/dt) <= 3 then
       asteroid.spawn()
     end
     time = time + dt
@@ -63,7 +64,7 @@ function love.keypressed(key)
       startGame()
     else
       --map.load(1)
-      events.startEvent(2, 10)
+      events.startEvent(6, 10)
     end
   elseif key == "1" then
     player.players[1].planet.hp = 0
