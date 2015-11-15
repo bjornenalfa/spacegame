@@ -56,11 +56,19 @@ function love.update(dt)
     if timeLeftToMenu >= 0 then
       timeLeftToMenu = timeLeftToMenu - dt
       if timeLeftToMenu <= 0 then
-        timeLeftToMenu = -1
-        drawMenu = true
+        returnToMenu()
       end
     end
   end
+end
+
+function returnToMenu()
+  timeLeftToMenu = -1
+  drawMenu = true
+  sound.battle1:stop()
+  sound.battle2:stop()
+  sound.battle3:stop()
+  sound.play("menu")
 end
 
 function love.keypressed(key)
