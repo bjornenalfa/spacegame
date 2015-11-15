@@ -24,6 +24,16 @@ end
 
 function p.update(dt)
   for _,v in pairs(p.players) do
+    if v.planet.removed then
+      print("test")
+      if timeLeftToMenu == -1 then
+        timeLeftToMenu = 4
+        -- Even worse code...
+        playerName = "Red"
+        if v.name == "Red" then playerName = "Blue" end
+        events.showText(playerName .. " Wins")
+      end
+    end
     if v.planet.hp > 0 then
       v.fireAngle = v.fireAngle
       v.cooldown = v.cooldown - dt

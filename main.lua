@@ -32,6 +32,7 @@ end
 
 -- 0 = normal mode, 1 = drunk mode
 drunkMode = false
+timeLeftToMenu = -1
 drawMenu = true
 time = 0
 timeMultiplier = 1
@@ -50,6 +51,13 @@ function love.update(dt)
     explosions.update(dt)
     asteroid.update(dt)
     events.update(dt)
+    if timeLeftToMenu >= 0 then
+      timeLeftToMenu = timeLeftToMenu - dt
+      if timeLeftToMenu <= 0 then
+        timeLeftToMenu = -1
+        drawMenu = true
+      end
+    end
   end
 end
 
