@@ -30,6 +30,8 @@ function m.load(i)
     planet1:addMoon(moon2)
     player1.planet = planet1
     player2.planet = planet2
+    camera.scale = 5
+    camera.mapScale = 0.65
   elseif i == 2 then
     p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)
@@ -42,6 +44,8 @@ function m.load(i)
     sun:addMoon(planet5)
     player1.planet = p1p
     player2.planet = p2p
+    camera.scale = 0.1
+    camera.mapScale = 0.75
     -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
   elseif i == 3 then
     p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
@@ -55,5 +59,7 @@ function m.load(i)
     sun:addMoon(planet5)
     player1.planet = p1p
     player2.planet = p2p
+    camera.scale = 0.1
+    camera.mapScale = 0.75
   end
 end

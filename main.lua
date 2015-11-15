@@ -22,8 +22,6 @@ function love.load()
   player1 = player.newPlayer("Bob", {}, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", {}, 90, "left", "right", "up")
   
-  map.load(2)
-  
   background.load()
   
   love.graphics.setBackgroundColor(0, 0, 0)
@@ -75,6 +73,7 @@ function startGame()
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
+  map.load(1)
 end
 
 function love.draw()
