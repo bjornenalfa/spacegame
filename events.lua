@@ -7,7 +7,7 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 2
+e.amount = 6
 
 cars = false
 
@@ -49,7 +49,10 @@ function events.startEvent(i, time)
   elseif i == 6 then
     e.showText("Avoid traffic!")
     cars = true
-    maxAsteroids = 30
+    maxAsteroids = maxAsteroids * 1.5
+  elseif i == 7 then
+    e.showText("More asteroids!")
+    maxAsteroids = maxAsteroids * 3
   end
 end
 
@@ -74,7 +77,9 @@ function events.stopEvent(i)
     player.damage = player.damage * 10
   elseif i == 6 then
     cars = false
-    maxAsteroids = 20
+    maxAsteroids = maxAsteroids / 1.5
+  elseif i == 7 then
+    maxAsteroids = maxAateroids / 3
   end
 end
 
