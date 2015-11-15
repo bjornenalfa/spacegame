@@ -30,6 +30,8 @@ function m.load(i)
     planet1:addMoon(moon2)
     player1.planet = planet1
     player2.planet = planet2
+    player1.towerAngle = -math.pi/2
+    player2.towerAngle = math.pi/2
     camera.scale = 5
     camera.mapScale = 0.65
   elseif i == 2 then
@@ -44,6 +46,8 @@ function m.load(i)
     sun:addMoon(planet5)
     player1.planet = p1p
     player2.planet = p2p
+    player1.towerAngle = -math.pi/2
+    player2.towerAngle = math.pi/2
     camera.scale = 0.1
     camera.mapScale = 0.75
     -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
@@ -60,6 +64,8 @@ function m.load(i)
     p2sun:addMoon(planet6)
     player1.planet = p1p
     player2.planet = p2p
+    player1.towerAngle = -math.pi/2
+    player2.towerAngle = math.pi/2
     camera.scale = 2
     camera.mapScale = 0.6
     -- mass, distance, radius, startAngle, speed, selfRotate, health, color, image
@@ -75,6 +81,8 @@ function m.load(i)
     sun:addMoon(planet5)
     player1.planet = p1p
     player2.planet = p2p
+    player1.towerAngle = -math.pi/2
+    player2.towerAngle = math.pi/2
     camera.scale = 0.1
     camera.mapScale = 0.6
   elseif i == 5 then
@@ -110,6 +118,8 @@ function m.load(i)
     p2sun:addMoon(planet6)
     player1.planet = p1p
     player2.planet = p2p
+    player1.towerAngle = -math.pi/2
+    player2.towerAngle = math.pi/2
     camera.scale = 2
     camera.mapScale = 0.6
   elseif i == 7 then
