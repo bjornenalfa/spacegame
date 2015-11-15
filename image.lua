@@ -6,6 +6,7 @@ function addImage(name)
 end
 
 addImage("sun")
+addImage("blackhole_mini")
 addImage("sun_sunglasses")
 addImage("planet_1")
 addImage("planet_2")

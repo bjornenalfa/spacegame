@@ -31,7 +31,8 @@ function events.startEvent(i, time)
     for _,v in pairs(planet.suns) do
       v.oldr = v.r
       v.r = 1
-      v.scale = v.r * 2 / v.image:getWidth()
+      --v.scale = v.r * 2 / v.image:getWidth()
+      v.image = image.blackhole_mini
     end
   elseif i == 3 then
     e.showText("Speed up!")
@@ -52,6 +53,7 @@ function events.stopEvent(i)
     for _,v in pairs(planet.suns) do
       v.r = v.oldr
       v.scale = v.r * 2 / v.image:getWidth()
+      v.image = image.sun
     end
   elseif i == 3 then
     timeMultiplier = timeMultiplier / 1.5
