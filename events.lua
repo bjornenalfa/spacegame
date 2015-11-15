@@ -7,7 +7,8 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 6
+e.amount = 8
+e.recommended = {10, 20, 25, 10, 10, 15, 15, 50}
 
 cars = false
 
@@ -27,6 +28,8 @@ function events.startEvent(i, time)
     e.showText("Space sunglasses")
     drunkMode = true
     sound.battle1:stop()
+    sound.battle2:stop()
+    sound.battle3:stop()
     sound.play(sound.sandstorm)
   elseif i == 2 then
     e.showText("Black holes")
@@ -34,14 +37,15 @@ function events.startEvent(i, time)
       v.oldr = v.r
       v.r = 1
       --v.scale = v.r * 2 / v.image:getWidth()
+      v.oldImage = v.image
       v.image = image.blackhole_mini
     end
   elseif i == 3 then
     e.showText("Speed up!")
-    timeMultiplier = timeMultiplier * 1.5
+    timeMultiplier = timeMultiplier * 2
   elseif i == 4 then
     e.showText("Speed down!")
-    timeMultiplier = timeMultiplier * 0.7
+    timeMultiplier = timeMultiplier * 0.5
   elseif i == 5 then
     e.showText("Rapid fire!")
     player.cooldown = player.cooldown / 10
@@ -53,6 +57,11 @@ function events.startEvent(i, time)
   elseif i == 7 then
     e.showText("More asteroids!")
     maxAsteroids = maxAsteroids * 3
+  elseif i == 8 then
+    e.showText("More moons!")
+    angle = math.rad(math.random(0,359))
+    player1.planet:addMoon(planet.new(1e6,    100,  10,     angle,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
+    player2.planet:addMoon(planet.new(1e6,    100,  10,     angle + math.pi,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
   end
 end
 
@@ -61,17 +70,19 @@ function events.stopEvent(i)
   if i == 1 then
     drunkMode = false
     sound.sandstorm:stop()
-    sound.play(sound.battle1)
+    music = sound["battle"..math.random(1,3)]
+    music:setLooping(true)
+    sound.play(music)
   elseif i == 2 then
     for _,v in pairs(planet.suns) do
       v.r = v.oldr
       v.scale = v.r * 2 / v.image:getWidth()
-      v.image = image.sun
+      v.image = v.oldImage
     end
   elseif i == 3 then
-    timeMultiplier = timeMultiplier / 1.5
+    timeMultiplier = timeMultiplier / 2
   elseif i == 4 then
-    timeMultiplier = timeMultiplier / 0.7
+    timeMultiplier = timeMultiplier / 0.5
   elseif i == 5 then
     player.cooldown = player.cooldown * 10
     player.damage = player.damage * 10
@@ -80,6 +91,8 @@ function events.stopEvent(i)
     maxAsteroids = maxAsteroids / 1.5
   elseif i == 7 then
     maxAsteroids = maxAateroids / 3
+  elseif i == 8 then
+    
   end
 end
 
@@ -99,6 +112,20 @@ function events.showText(text, text2)
 end
 
 function events.update(dt)
+  if e.texttime <= 0 then
+    if math.random(1,(1/dt)*30) == 1 then
+      possible = {}
+      for i = 1, e.amount do
+        if not e.active[i] then
+          table.insert(possible, i)
+        end
+      end
+      if #possible > 0 then
+        chosen = possible[math.random(1,#possible)]
+        events.startEvent(chosen, e.recommended[chosen])
+      end
+    end
+  end
   if e.showtext then
     e.texttime = e.texttime - dt
     if e.texttime <= 0 then
