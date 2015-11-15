@@ -75,5 +75,6 @@ function m.load(i)
     player2.planet = p2p
     camera.scale = 0.1
     camera.mapScale = 0.6
+  else error("Invalid level ID")
   end
 end

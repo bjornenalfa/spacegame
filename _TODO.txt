@@ -5,7 +5,7 @@ Reset-funktion
 Bugfix för fullRemove
 Explosioner påverkar projektiler
 ++Visa poäng
-Ge poäng för asteroider
+++Ge poäng för asteroider
 Laser
 Välja nivå från menyn?
 Visa poäng bättre

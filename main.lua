@@ -62,29 +62,35 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-  if not drawMenu then
-    player.keypressed(key)
-  end
   if key == "escape" then
     love.event.quit()
-  elseif key == " " then
-    if drawMenu then
-      startGame()
+  elseif not drawMenu then
+    if key == "1" then
+      player.players[1].planet.hp = 0
     else
+      player.keypressed(key)
+    end
+  else
+    if not pcall(function() startGame(tonumber(key)) end) then
+      startGame("random")
       --map.load(1)
       events.startEvent(6, 10)
     end
-  elseif key == "1" then
-    player.players[1].planet.hp = 0
+    --map.load(1)
+    --events.startEvent(2, 10)
   end
 end
 
-function startGame()
+function startGame(lvl)
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
   sound.battle2:setLooping(true)
-  map.load(1)
+  if lvl == "random" then
+    map.load(math.random(1,3))
+  else
+    map.load(lvl)
+  end
 end
 
 function love.draw()
