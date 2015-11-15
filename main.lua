@@ -33,7 +33,9 @@ end
 drunkMode = false
 drawMenu = true
 time = 0
+timeMultiplier = 1
 function love.update(dt)
+  dt = dt * timeMultiplier
   camera.update(dt)
   if not drawMenu then
     if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
