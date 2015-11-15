@@ -7,8 +7,8 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 8
-e.recommended = {10, 20, 25, 10, 10, 15, 15, 50}
+e.amount = 9
+e.recommended = {10, 20, 25, 10, 10, 15, 15, 50, 20}
 
 cars = false
 
@@ -61,7 +61,10 @@ function events.startEvent(i, time)
     e.showText("More moons!")
     angle = math.rad(math.random(0,359))
     player1.planet:addMoon(planet.new(1e6,    100,  10,     angle,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
-    player2.planet:addMoon(planet.new(1e6,    100,  10,     angle + math.pi,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
+    player2.planet:addMoon(planet.new(1e6,    100,  10,     angle,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
+  elseif i == 9 then
+    e.showText("Double trouble!")
+    doubleShot = true
   end
 end
 
@@ -93,12 +96,14 @@ function events.stopEvent(i)
     maxAsteroids = maxAsteroids / 3
   elseif i == 8 then
     
+  elseif i == 9 then
+    doubleShot = false
   end
 end
 
 function events.stopAll()
   e.stop = {}
-  for i = 1, #e.active do
+  for i = 1, e.amount do
     if e.active[i] then
       e.stopEvent(i)
     end
@@ -107,7 +112,7 @@ end
 
 function events.showText(text, text2)
   e.showtext = true
-  e.texttime = 2
+  e.texttime = 3
   e.text = text
   e.secondtext = text2
 end
@@ -153,7 +158,7 @@ e.texttime = 0
 
 function events.draw()
   if e.showtext then
-    menu.drawOutlinedText(e.text, 0, font.big, 3, {255,255,255,128}, {0,0,0,20})
+    menu.drawOutlinedText(e.text, 0, font.big, 3, {255,255,255,178}, {0,0,0,20})
     --menu.drawOutlinedText(e.secondtext, -70, font.h1, 2, {255,255,255,128}, {0,0,0,20})
   end
 end
