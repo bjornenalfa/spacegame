@@ -11,6 +11,7 @@ require "asteroid"
 require "font"
 require "events"
 require "map"
+require "pointDisplay"
 
 function love.load()
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
@@ -90,5 +91,7 @@ function love.draw()
     
     asteroid.draw()
     events.draw()
+    
+    pointDisplay.draw()
   end
 end

@@ -68,6 +68,7 @@ function a.update(dt)
         if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 50+pr.r*pr.r then
           if not collided then
             table.insert(collisions, projectileIndex)
+            other.owner.score = other.owner.score + 30
           end
           table.insert(projectileRemovals, i)
           break
