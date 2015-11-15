@@ -33,8 +33,12 @@ function events.startEvent(i, time)
       v.r = 1
       v.scale = v.r * 2 / v.image:getWidth()
     end
-    --sound.battle1:stop()
-    --sound.play(sound.sandstorm)
+  elseif i == 3 then
+    e.showText("Speed up!")
+    timeMultiplier = timeMultiplier * 1.5
+  elseif i == 4 then
+    e.showText("Speed down!")
+    timeMultiplier = timeMultiplier * 0.7
   end
 end
 
@@ -49,6 +53,10 @@ function events.stopEvent(i)
       v.r = v.oldr
       v.scale = v.r * 2 / v.image:getWidth()
     end
+  elseif i == 3 then
+    timeMultiplier = timeMultiplier / 1.5
+  elseif i == 4 then
+    timeMultiplier = timeMultiplier / 0.7
   end
 end
 
