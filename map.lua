@@ -5,6 +5,8 @@ local m = map
 
 function m.load(i)
   events.stopAll()
+  asteroid.asteroids = {}
+  projectile.projectiles = {}
   planet.planets = {}
   planet.suns = {}
   player1.planet = {}
