@@ -1,9 +1,12 @@
 Fler events (se _EventList.txt)
-Rymdskepp (ger -pts om tr�ffad)
+Rymdskepp (ger -pts om träffad)
 Flera rundor
 Reset-funktion
-Bugfix f�r fullRemove
-Explosioner p�verkar projektiler
-Visa po�ng
-Ge po�ng f�r asteroider
+Bugfix för fullRemove
+Explosioner påverkar projektiler
+++Visa poäng
+Ge poäng för asteroider
 Laser
+Välja nivå från menyn?
+Visa poäng bättre
+Låta spelare välja namn
