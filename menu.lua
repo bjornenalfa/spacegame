@@ -5,7 +5,7 @@ function m.draw()
   colorInside = {0, 255, 255}
   colorOutside = {0, 0, 255}
   m.drawOutlinedText("Space Battle Supreme", -270, font.h1, 3, colorInside, colorOutside)
-  msgList = {"Press Space to Start", "",
+  msgList = {"Press Any Key to Start", "",
             "-- Red Player --", "W - Fire", "A and D - Aim", "",
             "-- Blue Player --", "Up - Fire", "Left and Right - Aim"}
   for i = 1, #msgList do
