@@ -7,7 +7,7 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 1
+e.amount = 2
 
 function events.init()
   for i = 1, e.amount do
@@ -48,6 +48,14 @@ function events.stopEvent(i)
     for _,v in pairs(planet.suns) do
       v.r = v.oldr
       v.scale = v.r * 2 / v.image:getWidth()
+    end
+  end
+end
+
+function events.stopAll()
+  for i = 1, #e.active do
+    if e.active[i] then
+      e.stopEvent(i)
     end
   end
 end

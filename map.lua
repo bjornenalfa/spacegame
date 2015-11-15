@@ -4,6 +4,7 @@ local m = map
 --m.maps = {}
 
 function m.load(i)
+  events.stopAll()
   planet.planets = {}
   planet.suns = {}
   player1.planet = {}
@@ -23,18 +24,13 @@ function m.load(i)
     planet6 = planet.new(       15e6,   600,  47,     45,  -0.1,   1.5, 120,    {100, 255, 180},  image.planet_4)
     moon1 = planet.new(         1e6,    100,  10,     0,    1.5,   0,   100,    {255, 255, 255},  image.planet_3)
     moon2 = planet.new(         1e6,    100,  12,     90,   1.5,   0,   100,    {200, 0, 200},    image.planet_1)
-    sun:addMoon(planet1)
-    sun:addMoon(planet2)
-    sun:addMoon(planet3)
-    sun:addMoon(planet4)
-    sun:addMoon(planet5)
-    sun:addMoon(planet6)
-    sun:addMoon(planetDuoBase)
-    planetDuoBase:addMoon(planetDuo1)
-    planetDuoBase:addMoon(planetDuo2)
+    sun:addMoons(planet1, planet2, planet3, planet4, planet5, planet6, planetDuoBase)
+    planetDuoBase:addMoons(planetDuo1, planetDuo2)
     planet1:addMoon(moon1)
     planet1:addMoon(moon2)
     player1.planet = planet1
     player2.planet = planet2
+  elseif i == 2 then
+    p1sun = planet.newSun()
   end
 end

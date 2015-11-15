@@ -61,6 +61,7 @@ function love.keypressed(key)
     if drawMenu then
       startGame()
     else
+      --map.load(1)
       events.startEvent(2, 10)
     end
   end

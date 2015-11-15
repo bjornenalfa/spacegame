@@ -9,6 +9,7 @@ function planet.newSun(mass, x, y, radius, color, image)
   newSun = {
     m = mass,
     r = radius,
+    oldr = radius,
     x = x,
     y = y,
     hp = 100000,
@@ -52,6 +53,14 @@ end
 function planet:addMoon(moon)
   table.insert(self.moons, moon)
   moon.parent = self
+end
+
+function planet:addMoons(...)
+  moons = {...}
+  for _,moon in pairs(moons) do
+    table.insert(self.moons, moon)
+    moon.parent = self
+  end
 end
 
 function planet.getPlayerOne()
