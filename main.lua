@@ -14,6 +14,8 @@ require "map"
 require "pointDisplay"
 
 function love.load()
+  math.randomseed(os.time())
+  
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
   
   --asteroid.spawn()
@@ -74,7 +76,7 @@ function love.keypressed(key)
     if not pcall(function() startGame(tonumber(key)) end) then
       startGame("random")
       --map.load(1)
-      events.startEvent(6, 10)
+      --events.startEvent(6, 10)
     end
     --map.load(1)
     --events.startEvent(2, 10)
@@ -87,7 +89,7 @@ function startGame(lvl)
   sound.play("battle2")
   sound.battle2:setLooping(true)
   if lvl == "random" then
-    map.load(math.random(1,3))
+    map.load(math.random(1,4))
   else
     map.load(lvl)
   end
