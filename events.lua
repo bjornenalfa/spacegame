@@ -90,7 +90,7 @@ function events.stopEvent(i)
     cars = false
     maxAsteroids = maxAsteroids / 1.5
   elseif i == 7 then
-    maxAsteroids = maxAateroids / 3
+    maxAsteroids = maxAsteroids / 3
   elseif i == 8 then
     
   end
