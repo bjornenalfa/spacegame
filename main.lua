@@ -23,8 +23,6 @@ function love.load()
   player1 = player.newPlayer("Bob", {}, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", {}, 90, "left", "right", "up")
   
-  map.load(2)
-  
   background.load()
   
   love.graphics.setBackgroundColor(0, 0, 0)
@@ -36,7 +34,9 @@ end
 drunkMode = false
 drawMenu = true
 time = 0
+timeMultiplier = 1
 function love.update(dt)
+  dt = dt * timeMultiplier
   camera.update(dt)
   if not drawMenu then
     if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
@@ -74,6 +74,7 @@ function startGame()
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
+  map.load(1)
 end
 
 function love.draw()

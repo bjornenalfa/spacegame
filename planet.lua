@@ -63,16 +63,6 @@ function planet:addMoons(...)
   end
 end
 
-function planet.getPlayerOne()
-  if true then return 0,0 end
-  if #p.planets > 0 then
-    p1 = p.planets[1]
-    return -p1.x, -p1.y
-  else
-    return 0, 0
-  end
-end
-
 function planet.update(dt)
   destroyed = {}
   for k,v in pairs(p.planets) do
@@ -110,7 +100,11 @@ function planet.draw()
     crack = math.floor(((v.maxhp - v.hp) / v.maxhp) * 5 + 0.5)
     --love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
     --love.graphics.draw(image["cracks"..math.min(5,crack)], v.x - v.r, v.y - v.r, 0, v.scale)
-    love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
+    if v.isSun and v.r == 1 then
+      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.oldr / v.scale, v.oldr / v.scale)
+    else
+      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
+    end
     love.graphics.draw(image["cracks"..math.min(5,crack)], v.x, v.y,
           v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
     --love.graphics.circle("line", v.x, v.y, v.r)

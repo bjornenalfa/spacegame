@@ -31,10 +31,15 @@ function events.startEvent(i, time)
     for _,v in pairs(planet.suns) do
       v.oldr = v.r
       v.r = 1
-      v.scale = v.r * 2 / v.image:getWidth()
+      --v.scale = v.r * 2 / v.image:getWidth()
+      v.image = image.blackhole_mini
     end
-    --sound.battle1:stop()
-    --sound.play(sound.sandstorm)
+  elseif i == 3 then
+    e.showText("Speed up!")
+    timeMultiplier = timeMultiplier * 1.5
+  elseif i == 4 then
+    e.showText("Speed down!")
+    timeMultiplier = timeMultiplier * 0.7
   end
 end
 
@@ -48,7 +53,12 @@ function events.stopEvent(i)
     for _,v in pairs(planet.suns) do
       v.r = v.oldr
       v.scale = v.r * 2 / v.image:getWidth()
+      v.image = image.sun
     end
+  elseif i == 3 then
+    timeMultiplier = timeMultiplier / 1.5
+  elseif i == 4 then
+    timeMultiplier = timeMultiplier / 0.7
   end
 end
 
