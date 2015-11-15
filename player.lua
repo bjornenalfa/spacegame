@@ -5,6 +5,8 @@ p.players = {}
 p.cooldown = 1
 p.damage = 10
 
+doubleShot = false
+
 function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire, color)
   newPlayer = {
     name = name,
@@ -25,7 +27,6 @@ end
 function p.update(dt)
   for _,v in pairs(p.players) do
     if v.planet.removed then
-      print("test")
       if timeLeftToMenu == -1 then
         timeLeftToMenu = 4
         -- Even worse code...
@@ -43,6 +44,11 @@ function p.update(dt)
         x = pt.x + math.cos(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
         y = pt.y + math.sin(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
         projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, p.damage, v)
+        if doubleShot then
+          x = pt.x + math.cos(v.towerAngle + v.planet.selfRotation + math.pi) * (pt.r + 10)
+          y = pt.y + math.sin(v.towerAngle + v.planet.selfRotation + math.pi) * (pt.r + 10)
+          projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle - v.fireAngle + v.planet.selfRotation + math.pi, p.damage, v)
+        end
       end
       if love.keyboard.isDown(v.keyLeft) then
         v.fireAngle = v.fireAngle - math.pi * dt * 0.5
@@ -94,6 +100,19 @@ function p.draw()
       x = pt.x + math.cos(v.towerAngle + pt.selfRotation) * (pt.r + 8)
       y = pt.y + math.sin(v.towerAngle + pt.selfRotation) * (pt.r + 8)
       love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle + pt.selfRotation, pt.scale, pt.scale, 0,      cannonImg:getHeight()/2)
+      if doubleShot then
+        x = pt.x + math.cos(v.towerAngle + pt.selfRotation + math.pi) * pt.r
+        y = pt.y + math.sin(v.towerAngle + pt.selfRotation + math.pi) * pt.r
+        offX = width * 0.5
+        offY = height * 0.5
+        love.graphics.draw(img, x, y, v.towerAngle + pt.selfRotation + math.pi, pt.scale, pt.scale, offX, offY)
+        cannonImg = image.cannonBig
+        cannonWidth = cannonImg:getWidth()
+        cannonHeight = cannonImg:getHeight()
+        x = pt.x + math.cos(v.towerAngle + pt.selfRotation + math.pi) * (pt.r + 8)
+        y = pt.y + math.sin(v.towerAngle + pt.selfRotation + math.pi) * (pt.r + 8)
+        love.graphics.draw(cannonImg, x, y, v.towerAngle - v.fireAngle + pt.selfRotation + math.pi, pt.scale, pt.scale, 0,      cannonImg:getHeight()/2)
+      end
       -- love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, cannonWidth/ cannonImg:getWidth(), cannonHeight/ cannonImg:getHeight(), 0, cannonImg:getHeight()/2)
     end
   end

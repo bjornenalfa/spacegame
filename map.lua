@@ -5,8 +5,11 @@ local m = map
 
 function m.load(i)
   events.stopAll()
+  asteroid.asteroids = {}
+  projectile.projectiles = {}
   planet.planets = {}
   planet.suns = {}
+  events.showtext = false
   player1.planet = {}
   player2.planet = {}
   if i == 1 then
@@ -27,7 +30,7 @@ function m.load(i)
     sun:addMoons(planet1, planet2, planet3, planet4, planet5, planet6, planetDuoBase)
     planetDuoBase:addMoons(planetDuo1, planetDuo2)
     planet1:addMoon(moon1)
-    planet1:addMoon(moon2)
+    planet2:addMoon(moon2)
     player1.planet = planet1
     player2.planet = planet2
     player1.towerAngle = -math.pi/2
@@ -73,9 +76,9 @@ function m.load(i)
     p1sun = planet.newSun(2e7, -420, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 420, 0, 75, {255, 255, 255}, image.sun)
     sun = planet.newSun(6e7, 0, 0, 100, {255, 255, 255}, image.sun)
-    p1p = planet.new(       2e7,   170,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    p1p = planet.new(       2e7,   170,  40,     0,    0.5,   1.0, 100,    {255, 255, 255},  image.planet_2)
     p1sun:addMoon(p1p)
-    p2p = planet.new(       2e7,   170,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)
+    p2p = planet.new(       2e7,   170,  40,     180,  0.5,   1.0, 100,    {255, 255, 255},  image.planet_1)
     p2sun:addMoon(p2p)
     planet5 = planet.new(       12e6,   150,  35,     135, -1.5,   0.5, 70,     {100, 255, 100},  image.planet_2)
     sun:addMoon(planet5)
