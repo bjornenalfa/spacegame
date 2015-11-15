@@ -9,6 +9,7 @@ function m.load(i)
   projectile.projectiles = {}
   planet.planets = {}
   planet.suns = {}
+  events.showtext = false
   player1.planet = {}
   player2.planet = {}
   if i == 1 then
