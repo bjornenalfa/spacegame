@@ -97,6 +97,7 @@ function events.stopEvent(i)
 end
 
 function events.stopAll()
+  e.stop = {}
   for i = 1, #e.active do
     if e.active[i] then
       e.stopEvent(i)
