@@ -60,7 +60,7 @@ function projectile.update(dt)
               end
             end
             if belongsToPlayer then
-              pr.owner.score = pr.owner.score + 100 * (3-pr.duration)
+              pr.owner.score = pr.owner.score + 100 * pr.duration
               print(pr.owner.score)
             end
           end
