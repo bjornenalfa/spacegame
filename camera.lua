@@ -5,14 +5,14 @@ c.width = love.window.getWidth()
 c.height = love.window.getHeight()
 c.x = 0
 c.y = 0
-c.scale = 0.5
+c.scale = 0.001
 c.mapScale = 0.7
 
 function camera.update()
   c.width = love.window.getWidth()
   c.height = love.window.getHeight()
   scaleNeed = c.mapScale - c.scale
-  c.scale = c.scale + scaleNeed / 40
+  c.scale = c.scale + scaleNeed / 24
 end
 
 function camera.draw()
