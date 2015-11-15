@@ -60,7 +60,7 @@ function projectile.update(dt)
               end
             end
             if belongsToPlayer then
-              pr.owner.score = pr.owner.score + 100 * (3-pr.duration)
+              pr.owner.score = pr.owner.score + 100 * pr.duration
               print(pr.owner.score)
             end
           end
@@ -96,8 +96,8 @@ function projectile.update(dt)
 end
 
 function projectile.draw()
-  love.graphics.setColor(255,255,255)
   for _, pr in pairs(p.projectiles) do
+    love.graphics.setColor(pr.owner.color)
     --love.graphics.line(pr.ox, pr.oy, pr.x, pr.y)
     love.graphics.draw(pr.img, pr.x, pr.y, (math.atan2(pr.vy, pr.vx)), pr.w/pr.img:getWidth(), pr.l/pr.img:getHeight(), 0, 0)
   end

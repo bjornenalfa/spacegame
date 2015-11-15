@@ -2,8 +2,10 @@ player = {}
 local p = player
 
 p.players = {}
+p.cooldown = 1
+p.damage = 10
 
-function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
+function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire, color)
   newPlayer = {
     name = name,
     planet = planet,
@@ -13,7 +15,8 @@ function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
     keyRight = keyRight,
     keyFire = keyFire,
     cooldown = 0,
-    score = 0
+    score = 0,
+    color = color,
   }
   table.insert(p.players, newPlayer)
   return newPlayer
@@ -21,15 +24,25 @@ end
 
 function p.update(dt)
   for _,v in pairs(p.players) do
+    if v.planet.removed then
+      print("test")
+      if timeLeftToMenu == -1 then
+        timeLeftToMenu = 4
+        -- Even worse code...
+        playerName = "Red"
+        if v.name == "Red" then playerName = "Blue" end
+        events.showText(playerName .. " Wins")
+      end
+    end
     if v.planet.hp > 0 then
       v.fireAngle = v.fireAngle
       v.cooldown = v.cooldown - dt
       if love.keyboard.isDown(v.keyFire) and v.cooldown <= 0 then
-        v.cooldown = 1
+        v.cooldown = p.cooldown
         pt = v.planet
         x = pt.x + math.cos(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
         y = pt.y + math.sin(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
-        projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, 10, v)
+        projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, p.damage, v)
       end
       if love.keyboard.isDown(v.keyLeft) then
         v.fireAngle = v.fireAngle - math.pi * dt * 0.5
@@ -63,9 +76,9 @@ function p.keypressed(key)
 end
 
 function p.draw()
-  love.graphics.setColor(255,255,255)
   for _,v in pairs(p.players) do
     if v.planet.hp > 0 then
+      love.graphics.setColor(v.color)
       img = image.FireStationBase
       width = img:getWidth()
       height = img:getHeight()

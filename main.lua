@@ -14,14 +14,16 @@ require "map"
 require "pointDisplay"
 
 function love.load()
+  math.randomseed(os.time())
+  
   --projectile.new(image.missile_atomicbomb, 1, -360, 250, 20, 20, 200, 0, 90)
   
   --asteroid.spawn()
   
   -- players
   -- name, planet
-  player1 = player.newPlayer("Bob", {}, -90, "a", "d", "w")
-  player2 = player.newPlayer("SuperChungusIV", {}, 90, "left", "right", "up")
+  player1 = player.newPlayer("Red", {}, -90, "a", "d", "w", {255, 120, 120})
+  player2 = player.newPlayer("Blue", {}, 90, "left", "right", "up", {120, 120, 255})
   
   background.load()
   
@@ -32,14 +34,16 @@ end
 
 -- 0 = normal mode, 1 = drunk mode
 drunkMode = false
+timeLeftToMenu = -1
 drawMenu = true
 time = 0
 timeMultiplier = 1
+maxAsteroids = 20
 function love.update(dt)
   dt = dt * timeMultiplier
   camera.update(dt)
   if not drawMenu then
-    if #asteroid.asteroids < 20 and math.random(0,1/dt) <= 3 then
+    if #asteroid.asteroids < maxAsteroids and math.random(0,1/dt) <= 3 then
       asteroid.spawn()
     end
     time = time + dt
@@ -49,32 +53,46 @@ function love.update(dt)
     explosions.update(dt)
     asteroid.update(dt)
     events.update(dt)
+    if timeLeftToMenu >= 0 then
+      timeLeftToMenu = timeLeftToMenu - dt
+      if timeLeftToMenu <= 0 then
+        timeLeftToMenu = -1
+        drawMenu = true
+      end
+    end
   end
 end
 
 function love.keypressed(key)
-  if not drawMenu then
-    player.keypressed(key)
-  end
   if key == "escape" then
     love.event.quit()
-  elseif key == " " then
-    if drawMenu then
-      startGame()
+  elseif not drawMenu then
+    if key == "1" then
+      player.players[1].planet.hp = 0
     else
-      --map.load(1)
-      events.startEvent(2, 10)
+      player.keypressed(key)
     end
-  elseif key == "1" then
-    player.players[1].planet.hp = 0
+  else
+    if not pcall(function() startGame(tonumber(key)) end) then
+      startGame("random")
+      --map.load(1)
+      --events.startEvent(6, 10)
+    end
+    --map.load(1)
+    --events.startEvent(2, 10)
   end
 end
 
-function startGame()
+function startGame(lvl)
   drawMenu = false
   sound.menu:stop()
   sound.play("battle2")
-  map.load(7)
+  sound.battle2:setLooping(true)
+  if lvl == "random" then
+    map.load(math.random(1,7))
+  else
+    map.load(lvl)
+  end
 end
 
 function love.draw()

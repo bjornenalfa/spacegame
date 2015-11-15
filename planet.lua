@@ -66,15 +66,16 @@ end
 function planet.update(dt)
   destroyed = {}
   for k,v in pairs(p.planets) do
-    planet.updateMoons(v.x, v.y, v.moons, dt)
-    if not v.isSun and v.hp <= 0 then
+    if v.isSun then
+      planet.updateMoons(v.x, v.y, v.moons, dt)
+    elseif v.hp <= 0 then
       table.insert(destroyed, k)
     end
   end
   for i = #destroyed, 1, -1 do
     pl = p.planets[destroyed[i]]
     explosions.new(pl.x, pl.y, 0.2, pl.r)
-    planet.fullRemove(pl)
+    planet.remove(pl)
     sound.planet_explode:play()
   end
 end
@@ -111,7 +112,33 @@ function planet.draw()
   end
 end
 
-function planet.fullRemove(target)
+function planet.remove(target)
+  target.removed = true
+  delete = true
+  while delete do
+    delete = false
+    deleteList = {}
+    for _,v in pairs(p.planets) do
+      if v.removed then
+        table.insert(deleteList, _)
+        v.moons = {}
+      else
+        if v.parent then
+          if v.parent.removed then
+            v.parent = {}
+            table.insert(deleteList, _)
+          end
+        end
+      end
+    end
+    for i = #deleteList,1,-1 do
+      table.remove(p.planets, deleteList[i])
+      delete = true
+    end
+  end
+end
+
+--[[function planet.fullRemove(target)
   for k, v in pairs(p.planets) do
     if v == target then
       table.remove(p.planets, k)
@@ -141,4 +168,4 @@ function elem(item, list)
     if v == item then return true end
   end
   return false
-end
+end]]

@@ -1,10 +1,6 @@
-Svart hål
-Små planeter / stora planeter
-FASTER
-slow-mo
+Sm planeter / stora planeter
 fler asteroider
-asteroider delas upp i mindre (à la Asteroids)
+asteroider delas upp i mindre ( la Asteroids)
 rondell-mode
-rapid-fire
-asteroider gör skada
-dubbelpoäng
+asteroider gr skada
+dubbelpong
