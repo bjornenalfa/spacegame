@@ -16,6 +16,9 @@ function events.init()
 end
 
 function events.startEvent(i, time)
+  if e.active[i] then
+    return
+  end
   e.active[i] = true
   table.insert(e.stop, {time=time, event=i})
   if i == 1 then
@@ -23,14 +26,29 @@ function events.startEvent(i, time)
     drunkMode = true
     sound.battle1:stop()
     sound.play(sound.sandstorm)
+  elseif i == 2 then
+    e.showText("Black hole")
+    for _,v in pairs(planet.suns) do
+      v.oldr = v.r
+      v.r = 1
+      v.scale = v.r * 2 / v.image:getWidth()
+    end
+    --sound.battle1:stop()
+    --sound.play(sound.sandstorm)
   end
 end
 
 function events.stopEvent(i)
+  e.active[i] = false
   if i == 1 then
     drunkMode = false
     sound.sandstorm:stop()
     sound.play(sound.battle1)
+  elseif i == 2 then
+    for _,v in pairs(planet.suns) do
+      v.r = v.oldr
+      v.scale = v.r * 2 / v.image:getWidth()
+    end
   end
 end
 

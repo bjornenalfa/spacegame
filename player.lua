@@ -21,25 +21,25 @@ end
 
 function p.update(dt)
   for _,v in pairs(p.players) do
-    v.fireAngle = v.fireAngle + v.planet.selfRotationSpeed * dt
+    v.fireAngle = v.fireAngle
     v.cooldown = v.cooldown - dt
     if love.keyboard.isDown(v.keyFire) and v.cooldown <= 0 then
       v.cooldown = 1
       pt = v.planet
       x = pt.x + math.cos(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
       y = pt.y + math.sin(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
-      projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle, 10, v)
+      projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, 10, v)
     end
     if love.keyboard.isDown(v.keyLeft) then
       v.fireAngle = v.fireAngle - math.pi * dt * 0.5
-      if (v.fireAngle < v.planet.selfRotation - math.pi/2) then
-        v.fireAngle = v.planet.selfRotation - math.pi/2
+      if (v.fireAngle < - math.pi/2) then
+        v.fireAngle = - math.pi/2
       end
     end
     if love.keyboard.isDown(v.keyRight) then
       v.fireAngle = v.fireAngle + math.pi * dt * 0.5
-      if (v.fireAngle > v.planet.selfRotation + math.pi/2) then
-        v.fireAngle = v.planet.selfRotation + math.pi/2
+      if (v.fireAngle > math.pi/2) then
+        v.fireAngle = math.pi/2
       end
     end
   end
@@ -77,7 +77,7 @@ function p.draw()
     cannonHeight = cannonImg:getHeight()
     x = pt.x + math.cos(v.towerAngle + pt.selfRotation) * (pt.r + 8)
     y = pt.y + math.sin(v.towerAngle + pt.selfRotation) * (pt.r + 8)
-    love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, pt.scale, pt.scale, 0, cannonImg:getHeight()/2)
+    love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle + pt.selfRotation, pt.scale, pt.scale, 0, cannonImg:getHeight()/2)
     -- love.graphics.draw(cannonImg, x, y, v.towerAngle + v.fireAngle, cannonWidth/ cannonImg:getWidth(), cannonHeight/ cannonImg:getHeight(), 0, cannonImg:getHeight()/2)
   end
 end
