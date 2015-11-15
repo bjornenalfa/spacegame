@@ -9,6 +9,7 @@ function m.load(i)
   projectile.projectiles = {}
   planet.planets = {}
   planet.suns = {}
+  events.showtext = false
   player1.planet = {}
   player2.planet = {}
   if i == 1 then
@@ -39,7 +40,7 @@ function m.load(i)
   elseif i == 2 then
     p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
     p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)
-    sun = planet.newSun(6e7, 0, 0, 100, {255, 255, 255}, image.sun)
+    sun = planet.newSun(3e7, 0, 0, 100, {255, 255, 255}, image.sun)
     p1p = planet.new(       2e7,   110,  40,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
     p1sun:addMoon(p1p)
     p2p = planet.new(       2e7,   110,  40,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)

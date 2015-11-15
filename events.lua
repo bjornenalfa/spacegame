@@ -7,8 +7,8 @@ local e = events
 
 e.active = {}
 e.stop = {}
-e.amount = 9
-e.recommended = {10, 20, 25, 10, 10, 15, 15, 50, 20}
+e.amount = 10
+e.recommended = {10, 20, 25, 10, 10, 15, 15, 50, 20, 15}
 
 cars = false
 
@@ -41,30 +41,34 @@ function events.startEvent(i, time)
       v.image = image.blackhole_mini
     end
   elseif i == 3 then
-    e.showText("Speed up!")
+    e.showText("Speed up")
     timeMultiplier = timeMultiplier * 2
   elseif i == 4 then
-    e.showText("Speed down!")
+    e.showText("Speed down")
     timeMultiplier = timeMultiplier * 0.5
   elseif i == 5 then
-    e.showText("Rapid fire!")
+    e.showText("Rapid fire")
     player.cooldown = player.cooldown / 10
     player.damage = player.damage / 10
   elseif i == 6 then
-    e.showText("Avoid traffic!")
+    e.showText("Avoid traffic")
     cars = true
     maxAsteroids = maxAsteroids * 1.5
   elseif i == 7 then
-    e.showText("More asteroids!")
+    e.showText("More asteroids")
     maxAsteroids = maxAsteroids * 3
   elseif i == 8 then
-    e.showText("More moons!")
+    e.showText("More moons")
     angle = math.rad(math.random(0,359))
     player1.planet:addMoon(planet.new(1e6,    100,  10,     angle,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
     player2.planet:addMoon(planet.new(1e6,    100,  10,     angle,    1.5,   0,   100,    {math.random(0,255), math.random(0,255), math.random(0,255)},  image["planet_"..math.random(1,5)]))
   elseif i == 9 then
-    e.showText("Double trouble!")
+    e.showText("Double trouble")
     doubleShot = true
+  elseif i == 10 then
+    e.showText("Double damage")
+    player.cooldown = player.cooldown * 1.5
+    player.damage = player.damage * 2
   end
 end
 
@@ -98,6 +102,9 @@ function events.stopEvent(i)
     
   elseif i == 9 then
     doubleShot = false
+  elseif i == 10 then
+    player.cooldown = player.cooldown / 1.5
+    player.damage = player.damage / 2
   end
 end
 
@@ -117,9 +124,10 @@ function events.showText(text, text2)
   e.secondtext = text2
 end
 
+timeWithoutEvent = 0
 function events.update(dt)
   if e.texttime <= 0 then
-    if math.random(1,(1/dt)*30) == 1 then
+    if math.random(1,(1/dt)*30) == 1 or timeWithoutEvent >= 40 then
       possible = {}
       for i = 1, e.amount do
         if not e.active[i] then
@@ -129,7 +137,10 @@ function events.update(dt)
       if #possible > 0 then
         chosen = possible[math.random(1,#possible)]
         events.startEvent(chosen, e.recommended[chosen])
+        timeWithoutEvent = 0
       end
+    else
+      timeWithoutEvent = timeWithoutEvent + dt / timeMultiplier
     end
   end
   if e.showtext then
