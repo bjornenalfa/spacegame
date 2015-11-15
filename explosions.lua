@@ -38,6 +38,7 @@ end
 function explosions.draw()
   love.graphics.setColor(255,255,255)
   for _,v in pairs(e.explosions) do
+    love.graphics.translate(math.random(-5,5), math.random(-5,5))
     img = image["planetexplosion"..v.frame]
     w = img:getWidth()
     h = img:getHeight()

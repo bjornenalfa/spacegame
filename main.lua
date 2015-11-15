@@ -22,7 +22,7 @@ function love.load()
   player1 = player.newPlayer("Bob", {}, -90, "a", "d", "w")
   player2 = player.newPlayer("SuperChungusIV", {}, 90, "left", "right", "up")
   
-  map.load(1)
+  map.load(2)
   
   background.load()
   
@@ -82,10 +82,11 @@ function love.draw()
   if drawMenu then
     menu.draw()
   else
+    explosions.draw()
     planet.draw()
     player.draw()
     projectile.draw()
-    explosions.draw()
+    
     asteroid.draw()
     events.draw()
   end

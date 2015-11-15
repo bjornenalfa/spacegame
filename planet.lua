@@ -64,7 +64,8 @@ function planet:addMoons(...)
 end
 
 function planet.getPlayerOne()
-  if table.getn(p.planets) then
+  if true then return 0,0 end
+  if #p.planets > 0 then
     p1 = p.planets[1]
     return -p1.x, -p1.y
   else

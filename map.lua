@@ -16,8 +16,8 @@ function m.load(i)
     planetDuoBase = planet.new( 1,      200,  0,      270, -0.5,   0,   100000, {0, 0, 0},  image.planet_3)
     planetDuo1 = planet.new(    4e6,    30,   20,     180,  1,     2,   100,    {255, 100, 200},  image.planet_5)
     planetDuo2 = planet.new(    4e6,    30,   20,     0,    1,     3,   100,    {100, 100, 255},  image.planet_1)
-    planet1 = planet.new(       20e6,   350,  50,     0,    0.5,   1.0, 100,    {255, 255, 255},  image.planet_2)
-    planet2 = planet.new(       20e6,   350,  50,     180,  0.5,   1.0, 100,    {255, 255, 255},  image.planet_1)
+    planet1 = planet.new(       2e7,   350,  50,     0,    0.5,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    planet2 = planet.new(       2e7,   350,  50,     180,  0.5,   1.0, 100,    {255, 255, 255},  image.planet_1)
     planet3 = planet.new(       8e6,    1200, 20,     90,   0.01,  0.1, 50,     {255, 0, 250},    image.planet_3)
     planet4 = planet.new(       15e6,   800,  40,     180,  0.05,  0.2, 50,     {100, 100, 100},  image.planet_4)
     planet5 = planet.new(       12e6,   200,  35,     135, -0.5,   0.5, 70,     {100, 255, 100},  image.planet_2)
@@ -31,6 +31,14 @@ function m.load(i)
     player1.planet = planet1
     player2.planet = planet2
   elseif i == 2 then
-    p1sun = planet.newSun()
+    p1sun = planet.newSun(2e7, -300, 0, 75, {255, 255, 255}, image.sun)
+    p2sun = planet.newSun(2e7, 300, 0, 75, {255, 255, 255}, image.sun)
+    sun = planet.newSun(6e7, 0, 0, 100, {255, 255, 255}, image.sun)
+    p1p = planet.new(       2e7,   100,  50,     0,    1.0,   1.0, 100,    {255, 255, 255},  image.planet_2)
+    p1sun:addMoon(p1p)
+    p2p = planet.new(       2e7,   100,  50,     180,  1.0,   1.0, 100,    {255, 255, 255},  image.planet_1)
+    p2sun:addMoon(p2p)
+    player1.planet = p1p
+    player2.planet = p2p
   end
 end
