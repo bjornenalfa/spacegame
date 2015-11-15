@@ -2,6 +2,8 @@ player = {}
 local p = player
 
 p.players = {}
+p.cooldown = 1
+p.damage = 10
 
 function p.newPlayer(name, planet, towerAngle, keyLeft, keyRight, keyFire)
   newPlayer = {
@@ -25,11 +27,11 @@ function p.update(dt)
       v.fireAngle = v.fireAngle
       v.cooldown = v.cooldown - dt
       if love.keyboard.isDown(v.keyFire) and v.cooldown <= 0 then
-        v.cooldown = 1
+        v.cooldown = p.cooldown
         pt = v.planet
         x = pt.x + math.cos(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
         y = pt.y + math.sin(v.towerAngle + v.planet.selfRotation) * (pt.r + 10)
-        projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, 10, v)
+        projectile.new(image.missile_atomicbombSmall, 1, x, y, 17, 28, 1000, v.towerAngle + v.fireAngle + v.planet.selfRotation, p.damage, v)
       end
       if love.keyboard.isDown(v.keyLeft) then
         v.fireAngle = v.fireAngle - math.pi * dt * 0.5

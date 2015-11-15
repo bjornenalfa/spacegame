@@ -3,7 +3,7 @@ local a = asteroid
 
 a.asteroids = {}
 
-function asteroid.new(x, y, radius, angle, speed, image, color, rotationSpeed)
+function asteroid.new(x, y, radius, angle, speed, image, color, rotationSpeed, score)
   newAsteroid = {
     x = x,
     y = y,
@@ -13,7 +13,8 @@ function asteroid.new(x, y, radius, angle, speed, image, color, rotationSpeed)
     color = color,
     angle = 0,
     av = rotationSpeed,
-    image = image
+    image = image,
+    score = score
   }
   table.insert(a.asteroids, newAsteroid)
 end
@@ -27,7 +28,11 @@ function asteroid.spawn()
   dist = math.random(min_distance, max_distance)
   incoming = math.rad(math.random(0, 360))
   movementDirection = math.rad(180) + incoming + math.random(-angle_interval, angle_interval)
-  asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 20, movementDirection, 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2)
+  if cars then
+    asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 40, movementDirection, math.random(100,250), "spacecar", {255, 255, 255}, 0.5, -100)
+  else
+    asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), math.random(20,30), movementDirection, 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2, 30)
+  end
 end
 
 function a.update(dt)
@@ -68,7 +73,7 @@ function a.update(dt)
         if (pr.x - other.x) * (pr.x - other.x) + (pr.y - other.y) * (pr.y - other.y) < 50+pr.r*pr.r then
           if not collided then
             table.insert(collisions, projectileIndex)
-            other.owner.score = other.owner.score + 30
+            other.owner.score = other.owner.score + pr.score
           end
           table.insert(projectileRemovals, i)
           break
