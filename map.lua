@@ -13,6 +13,7 @@ function m.load(i)
   player1.planet = {}
   player2.planet = {}
   events.startEvent(5,100000)
+  events.startEvent(6,100000)
   events.startEvent(9,100000)
   if i == 1 then
     -- mass, x, y, radius, color, image
