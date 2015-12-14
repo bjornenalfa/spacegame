@@ -1,3 +1,5 @@
+christmas = true
+
 require "planet"
 require "projectile"
 require "camera"
@@ -74,7 +76,9 @@ function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
   elseif not drawMenu then
-    if key == "k" and love.keyboard.isDown("lctrl") then
+    if key == "h" then
+      events.startEvent(6, 30)
+    elseif key == "k" and love.keyboard.isDown("lctrl") then
       player.players[1].planet.hp = 0
     elseif key == "k" and love.keyboard.isDown("rctrl") then
       player.players[2].planet.hp = 0

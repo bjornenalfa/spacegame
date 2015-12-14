@@ -21,6 +21,8 @@ addImage("cannonSmall")
 addImage("cannonBig")
 addImage("inverter")
 addImage("spacecar")
+addImage("TOMTELUA2")
+addImage("santa")
 
 for i = 0,5 do
   addImage("cracks"..i)
@@ -41,3 +43,7 @@ addImage("stars3")
 addImage("stars4")
 addImage("star1")
 addImage("star2")
+
+if christmas then
+  image.sun = image.TOMTELUA2
+end

@@ -25,12 +25,12 @@ function events.startEvent(i, time)
   e.active[i] = true
   table.insert(e.stop, {time=time, event=i})
   if i == 1 then
-    e.showText("Space sunglasses")
+    --[[e.showText("Space sunglasses")
     drunkMode = true
     sound.battle1:stop()
     sound.battle2:stop()
     sound.battle3:stop()
-    sound.play(sound.sandstorm)
+    sound.play(sound.sandstorm)]]
   elseif i == 2 then
     e.showText("Black holes")
     for _,v in pairs(planet.suns) do
@@ -75,11 +75,11 @@ end
 function events.stopEvent(i)
   e.active[i] = false
   if i == 1 then
-    drunkMode = false
+    --[[drunkMode = false
     sound.sandstorm:stop()
     music = sound["battle"..math.random(1,3)]
     music:setLooping(true)
-    sound.play(music)
+    sound.play(music)]]
   elseif i == 2 then
     for _,v in pairs(planet.suns) do
       v.r = v.oldr

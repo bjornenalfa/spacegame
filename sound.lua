@@ -29,6 +29,12 @@ s.addSound("sandstorm", ".mp3")
 s.addSound("menu", ".ogg")
 s.menu:setVolume(0.3)
 
+s.addSound("All I Want For Christmas (is to kick your ass)", ".wav")
+s["All I Want For Christmas (is to kick your ass)"]:setVolume(1)
+s.battle1 = s["All I Want For Christmas (is to kick your ass)"]
+s.battle2 = s["All I Want For Christmas (is to kick your ass)"]
+s.battle3 = s["All I Want For Christmas (is to kick your ass)"]
+
 
 s.addStaticSound("missile_shoot", ".wav")
 s.addStaticSound("laser_shoot", ".wav")

@@ -17,6 +17,8 @@ function planet.newSun(mass, x, y, radius, color, image)
     color = color,
     image = image,
     scale = radius * 2 / image:getWidth(),
+    xscale = radius * 2 / image:getWidth(),
+    yscale = radius * 2 / image:getHeight(),
     moons = {},
     isSun = true
   }
@@ -42,6 +44,8 @@ function planet.new(mass, distance, radius, startAngle, speed, selfRotationSpeed
       color = color,
       image = image,
       scale = radius * 2 / image:getWidth(),
+      xscale = radius * 2 / image:getWidth(),
+      yscale = radius * 2 / image:getHeight(),
       moons = {},
       isSun = false
   }
@@ -102,12 +106,12 @@ function planet.draw()
     --love.graphics.draw(img, v.x - v.r, v.y - v.r, 0, v.scale)
     --love.graphics.draw(image["cracks"..math.min(5,crack)], v.x - v.r, v.y - v.r, 0, v.scale)
     if v.isSun and v.r == 1 then
-      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.oldr / v.scale, v.oldr / v.scale)
+      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.xscale, v.yscale, v.oldr / v.xscale, v.oldr / v.yscale)
     else
-      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
+      love.graphics.draw(img, v.x, v.y, v.selfRotation, v.xscale, v.yscale, v.r / v.xscale, v.r / v.yscale)
     end
     love.graphics.draw(image["cracks"..math.min(5,crack)], v.x, v.y,
-          v.selfRotation, v.scale, v.scale, v.r / v.scale, v.r / v.scale)
+          v.selfRotation, v.xscale, v.yscale, v.r / v.xscale, v.r / v.yscale)
     --love.graphics.circle("line", v.x, v.y, v.r)
   end
 end

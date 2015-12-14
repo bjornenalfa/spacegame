@@ -29,7 +29,7 @@ function asteroid.spawn()
   incoming = math.rad(math.random(0, 360))
   movementDirection = math.rad(180) + incoming + math.random(-angle_interval, angle_interval)
   if cars then
-    asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 40, movementDirection, math.random(100,250), "spacecar", {255, 255, 255}, 0.5, -100)
+    asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), 40, movementDirection, math.random(100,250), "santa", {255, 255, 255}, 0.5, -100)
   else
     asteroid.new(dist * math.cos(incoming), dist * math.sin(incoming), math.random(20,30), movementDirection, 50, "planetdebris"..math.random(1,5), {255, 255, 255}, 2, 30)
   end
