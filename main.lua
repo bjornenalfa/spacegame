@@ -24,12 +24,12 @@ function love.load()
   
   -- players
   -- name, planet
-  player1 = player.newPlayer("Red", {}, -90, "a", "d", "w", {255, 120, 120})
-  player2 = player.newPlayer("Blue", {}, 90, "left", "right", "up", {120, 120, 255})
+  player1 = player.newPlayer("Red", {}, -90, "a", "d", "w", {255, 80, 80})
+  player2 = player.newPlayer("Blue", {}, 90, "left", "right", "up", {80, 80, 255})
   
   background.load()
   
-  love.graphics.setBackgroundColor(0, 0, 0)
+  love.graphics.setBackgroundColor(50, 50, 50)
   
   sound.play("menu")
 end
@@ -50,7 +50,7 @@ function love.update(dt)
     time = time + dt
     planet.update(dt)
     player.update(dt)
-    projectile.update(dt)
+    pcall(function() projectile.update(dt) end)
     explosions.update(dt)
     asteroid.update(dt)
     events.update(dt)
