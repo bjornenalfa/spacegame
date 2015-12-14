@@ -12,6 +12,8 @@ function m.load(i)
   events.showtext = false
   player1.planet = {}
   player2.planet = {}
+  events.startEvent(5,100000)
+  events.startEvent(9,100000)
   if i == 1 then
     -- mass, x, y, radius, color, image
     sun = planet.newSun(1e8, 0, 0, 150, {255, 255, 255}, image.sun)
